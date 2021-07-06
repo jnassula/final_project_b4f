@@ -3,36 +3,48 @@
 ## Requisitos Funcionais
 
 ### Acessos
-- O responsável do grupo terá acesso à sua página pessoal (editável)
-- O responsável do grupo terá acesso à página familiar (editável)
-- O responsável do grupo terá acesso aos resumos (leitura)
-- O responsável do grupo terá acesso à gestão da situação familiar (editável)
 
-- O utilizador (que não seja administrador do grupo) terá acesso à sua página pessoal  (editável)
-- O utilizador (que não seja administrador do grupo) terá acesso à página familiar (leitura)
-- O utilizador (que não seja administrador do grupo) não terá acesso ao relatório mensal
+- [ ] Deve ser possível o responsável do grupo ter acesso à sua página pessoal 
+- [ ] Deve ser possível ao responsável do grupo editar as informações da sua página pessoal
+- [ ] Deve ser possível o responsável do grupo ter acesso à página familiar 
+- [ ] Deve ser possível o responsável do grupo receber as notificações dos outros membros relativas às possíveis alterações da lista de compras
+- [ ] Deve ser possível o responsável do grupo editar a lista de compras
+- [ ] Deve ser possível o responsável do grupo ter editar as informações da página familiar 
+- [ ] Deve ser possível o responsável do grupo ter acesso aos relatórios mensais
+- [ ] Deve ser possível o  responsável do grupo ter acesso às funcionalidades de gestão de acessos dos restantes membros do grupo
 
-- O visitante deve ter apenas acesso à Landing Page onde terá acesso a vídeo introdutório sobre a app ( OU acesso familiar e pessoal??)
-- O visitante deve ter a possibilidade de criar conta na Landing Page
+- [ ] Deve ser possível o utilizador (que não seja administrador do grupo) ter acesso à sua página pessoal  
+- [ ] Deve ser possível o utilizador (que não seja administrador do grupo) editar as informações da sua página pessoal  
+- [ ] Deve ser possível o utilizador (que não seja administrador do grupo) ter acesso à página familiar 
+- [ ] Deve ser possível o utilizador (que não seja administrador do grupo) não ter acesso ao relatório mensal
 
-- Todos os membros têm acesso à lista de compras
-- Todos os membros têm acesso ao mapa de gastos fixos
-- Todos os membros têm acesso ao mapa de gastos variáveis
+- [ ] Deve ser possível o visitante ter apenas acesso à Landing Page onde terá acesso a vídeo introdutório sobre a app
+- [ ] Deve ser possível o visitante ter à sua disposição um botão que o permite criar conta na Landing Page
+
+- [ ] Deve ser possível a todos os membros o acesso à visualização da lista de compras
+- [ ] Deve ser possível a todos os membros o acesso ao mapa de gastos fixos
+- [ ] Deve ser possível a todos os membros o acesso ao mapa de gastos variáveis
 
 
-- Deve ser possível os membros definirem um objetivo com percentagem de poupança
-- Deve ser possível os membros definirem um objetivo com prazo
-- Deve ser possível os membros definirem valor total a ser poupado
+- [ ] Deve ser possível os membros definirem um objetivo com percentagem de poupança
+- [ ] Deve ser possível os membros definirem um objetivo com prazo
+- [ ] Deve ser possível os membros definirem valor total a ser poupado
 
 ### Comunicação
-- Os membros devem ter acesso a botão "Vou às Compras"
-- Ao clicar em "Vou às Compras" deve ser enviada uma notificação a todos os membros
-- Após notificação, todos os membros, devem conseguir adicionar itens à lista de compras
-
+- [ ] Deve ser possível a todos os membros o acesso ao botão "Vou às Compras"
+- [ ] Deve ser possível enviar uma notificação a todos os membros ao clicar no botão "Vou às Compras" 
+- [ ] Deve ser possível, a todos os membros, notificar através de mensagens, o administrador para que este possa alterar a lista de compras 
 
 ## Requisitos Não Funcionais
--
+- [ ] A aplicação será mobile first
+- [ ] A aplicação estará disponível para Desktop
+- [ ] O utilizador tem acesso à app quando está offline
+- [ ] O utilizador só consegue adicionar comentários se estiver online
+
 
 ## Requisitos de Negócio
+- [ ] O visitante tem de estar registado para ter acesso a todas as funcionalidades da app
+
+
 
 
