@@ -47,4 +47,9 @@
 
 
 
+## Arquitetura de Software
+![Arquitetura](https://i.ibb.co/F4kK9yb/Arquitetura-Software.png)
 
+
+## UML 
+![UML](https://i.ibb.co/L8frW86/UML.png)
