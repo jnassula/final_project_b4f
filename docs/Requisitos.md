@@ -33,7 +33,8 @@
 ### Comunicação
 - [ ] Deve ser possível a todos os membros o acesso ao botão "Vou às Compras"
 - [ ] Deve ser possível enviar uma notificação a todos os membros ao clicar no botão "Vou às Compras" 
-- [ ] Deve ser possível, a todos os membros, notificar através de mensagens, o administrador para que este possa alterar a lista de compras 
+- [ ] Deve ser possível, a todos os membros adicionar items à lista de compras que ficam numa secção diferente.
+- [ ] Deve ser possível ver quem é que adicionou que items à lista de compras.
 
 ## Requisitos Não Funcionais
 - [ ] A aplicação será mobile first
