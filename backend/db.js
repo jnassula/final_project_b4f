@@ -1,6 +1,5 @@
 import mongodb from 'mongodb'
-import MongoClient from 'mongodb'
-
+const {MongoClient} = mongodb
 
 
 
@@ -18,7 +17,7 @@ async function connect(uri){
         client = new MongoClient(uri, {
             useUnifiedTopology: true
         });
-        // await client.connect();
+        await client.connect();
         return client;
     } catch(err){
         console.log(err)
