@@ -25,5 +25,13 @@ app.post('/lista', async (req, res) => {
 })
 
 
+app.post('/mensagem', async (req, res) => {
+    try{
+        res.status(200).json(`Notificação enviada a todos os elementos do grupo.`)
+    }catch(err){
+        console.log(err)
+    }
+})
+
 
 app.listen(PORT, () => console.log(`À escuta em ${PORT}`))

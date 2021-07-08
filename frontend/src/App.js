@@ -22,7 +22,13 @@ useEffect(() => {
   // Returnamos o novo estado, com o item adicionado.
   // Esta função é chamada onSubmit (o Formik faz a comunicação)
 
-
+  function enviarMensagem(){
+    fetch("/mensagem", {
+      method: "POST"
+    }).then(res => res.json()
+    .then(json => console.log(json)))
+  }
+  
 
   return (
     <div className="App">
@@ -59,7 +65,7 @@ useEffect(() => {
       </Formik>
         <div>
           <p>
-            <button type = "submit">Vou às compras</button>
+            <button onClick={enviarMensagem} type = "alert" >Vou às compras</button>
           </p>
         </div>
     </div>
