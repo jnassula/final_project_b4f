@@ -1,6 +1,7 @@
 import express  from "express";
 const PORT = 3001
 const app = express()
+import {getCollection, insertItem}  from './db.js'
 
 
 app.use(express.json())
@@ -14,9 +15,13 @@ app.get('/', (req, res) => {
 
 
 // POST para adicionar items à lista
-app.post('/itens', async (req, res) => {
-    const itens = req.body
-    res.status(200).json({itens})
+app.post('/lista', async (req, res) => {
+    try{
+        const lista = await insertItem(req.body)
+        res.status(200).json({lista})
+    }catch(err){
+        console.log(err)
+    }
 })
 
 

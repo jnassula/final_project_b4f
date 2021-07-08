@@ -27,9 +27,9 @@ useEffect(() => {
   return (
     <div className="App">
       <Formik
-        initialValues={{descricao: "", quantidade: "", tipo: ""}}
+        initialValues={{descricao: "", quantidade: "", unidade: "un"}}
         onSubmit={(values) => {
-        fetch("/itens", {
+        fetch("/lista", {
           method: "POST",
           body: JSON.stringify(values),
           headers: {
@@ -43,11 +43,11 @@ useEffect(() => {
       {
         ({handleSubmit}) => (
           <form onSubmit={handleSubmit}>
-            <Field name="descricao" />
-            <Field name="quantidade" type="number" />
-            <Field as="select" name="tipo">
-             <option value="kg">KG</option>
+            <Field name="descricao" required />
+            <Field name="quantidade" type="number" required />
+            <Field name="unidade" as="select" required>
              <option value="un">UN</option>
+             <option value="kg">KG</option>
              <option value="lt">LT</option>
              </Field>
             <button type = "submit">Adicionar item</button>
