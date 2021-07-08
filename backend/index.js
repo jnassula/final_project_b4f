@@ -5,20 +5,18 @@ const app = express()
 
 app.use(express.json())
 
-
+// Teste back e front
 app.get('/', (req, res) => {
     res.status(200).json({
         message: "A comunicar back e front"
     })
 })
 
-app.get('/teste', (req, res) => {
-    console.log("Teste1")
-    res.status(200).json({
-        
-        message: "Pedido frontend"
 
-    })
+// POST para adicionar items à lista
+app.post('/itens', async (req, res) => {
+    const itens = req.body
+    res.status(200).json({itens})
 })
 
 
