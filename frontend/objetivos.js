@@ -47,7 +47,7 @@ useEffect(() => {
             <Field name="valor" type="number" required />
             <Field name="prazo" type="date" required />
             <button type = "submit">Adicionar objetivo</button>
-          </form>
+          </form> 
         )
       }
 
