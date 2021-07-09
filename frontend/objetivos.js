@@ -6,12 +6,12 @@ import React, { useEffect } from 'react';
 function Objetivo() {
   const [listaDeObjetivos, updateObjetivos] = React.useState([])
 
-useEffect(() => {
-  console.log(listaDeObjetivos)
-}, [listaDeOjetivos])
+  useEffect(() => {
+    console.log(listaDeObjetivos)
+  }, [])
 
 
-  async function adicionarObjetivo(item){
+  async function adicionarObjetivo(item) {
     updateObjetivos(prevState => {
       const novoState = prevState.concat(item)
       return novoState
@@ -27,37 +27,37 @@ useEffect(() => {
   return (
     <div className="Objetivo">
       <Formik
-        initialValues={{valor: "", prazo: ""}}
+        initialValues={{ valor: "", prazo: "" }}
         onSubmit={(values) => {
-        fetch("/lista", {
-          method: "POST",
-          body: JSON.stringify(values),
-          headers: {
-            "Content-type": "application/json"
-          }
-        }).then(res => res.json()
-        .then(json => adicionarObjetivo(json)))
-      }}
+          fetch("/lista", {
+            method: "POST",
+            body: JSON.stringify(values),
+            headers: {
+              "Content-type": "application/json"
+            }
+          }).then(res => res.json()
+            .then(json => adicionarObjetivo(json)))
+        }}
       >
-      
-      {
-        ({handleSubmit}) => (
-          <form onSubmit={handleSubmit}>
-            <Field name="descricao" required />
-            <Field name="valor" type="number" required />
-            <Field name="prazo" type="date" required />
-            <button type = "submit">Adicionar objetivo</button>
-          </form> 
-        )
-      }
 
-      
+        {
+          ({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Field name="descricao" required />
+              <Field name="valor" type="number" required />
+              <Field name="prazo" type="date" required />
+              <button type="submit">Adicionar objetivo</button>
+            </form>
+          )
+        }
+
+
       </Formik>
-        <div>
-          <p>
-            <button type = "submit">Contribuir</button>
-          </p>
-        </div>
+      <div>
+        <p>
+          <button type="submit">Contribuir</button>
+        </p>
+      </div>
     </div>
   );
 }
