@@ -5,12 +5,20 @@ import createList from '../services/lista'
 
 const listaRouter = express.Router()
 
+listaRouter.get("/", async (req,res) => {
+    try{
+        res.status(200).send("Camada router a bombar")
+    }catch(err){
+        console.log(err)
+    }
+})
+
+
 
 listaRouter.post("/", async (req,res) => {
     try{
-        console.log("Camada router a bombar")
-        const lista = await createList()
-        res.status(200).json({id: id})
+        const nomeDalista = await createList(req.body)
+        res.status(200).json(nomeDalista)
     }catch(err){
         console.log(err)
     }
