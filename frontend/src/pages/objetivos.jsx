@@ -1,4 +1,3 @@
-import './App.css';
 import { Formik, Field } from 'formik';
 import React, { useEffect } from 'react';
 
@@ -6,9 +5,9 @@ import React, { useEffect } from 'react';
 function Objetivo() {
   const [listaDeObjetivos, updateObjetivos] = React.useState([])
 
-  useEffect(() => {
-    console.log(listaDeObjetivos)
-  }, [])
+useEffect(() => {
+  console.log(listaDeObjetivos)
+})
 
 
   async function adicionarObjetivo(item) {
@@ -27,17 +26,17 @@ function Objetivo() {
   return (
     <div className="Objetivo">
       <Formik
-        initialValues={{ valor: "", prazo: "" }}
+        initialValues={{descricao: "", valor: "", prazo: ""}}
         onSubmit={(values) => {
-          fetch("/lista", {
-            method: "POST",
-            body: JSON.stringify(values),
-            headers: {
-              "Content-type": "application/json"
-            }
-          }).then(res => res.json()
-            .then(json => adicionarObjetivo(json)))
-        }}
+        fetch("/objetivo", {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-type": "application/json"
+          }
+        }).then(res => res.json()
+        .then(json => adicionarObjetivo(json)))
+      }}
       >
 
         {
