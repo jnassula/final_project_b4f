@@ -1,9 +1,7 @@
 import mongodb from 'mongodb'
 const {MongoClient} = mongodb
 const URI = "mongodb://localhost:27017"
-
-
-const DB_NAME = "smartSavings"
+const DB_NAME = "smartSavings" // Talvez não precisamos
 
 
 
@@ -33,21 +31,5 @@ export async function getCollection(dbName, colName){
 }
 
 
-export async function getList(id){
-    const collection = await getCollection(DB_NAME, "lista");
-    return  await collection.findOne({_id: ObjectId(id)})
-}
 
-
-// Nesta função inserimos um item e passamos-lhe um item.
-// A coleção é o resultado de passar a colecção que queremos pesquisar (lista)
-// A resposta do nosso pedido é inserir um item na colecção /criar uma nova
-// A FAZER: CRIAR UMA LISTA DE LISTAS
-export async function insertItem(item){
-    const collection = await getCollection(DB_NAME, "lista");
-    const res = await collection.insertOne()
-    return res.insertedId
-}
-
-
-
+export default getCollection

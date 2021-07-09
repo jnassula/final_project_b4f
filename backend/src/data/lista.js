@@ -1,4 +1,6 @@
+import mongodb from 'mongodb';
 import getCollection from './db'
+const {ObjectId} = mongodb
 
 
 async function getList(id){
@@ -11,12 +13,13 @@ async function getList(id){
 // A coleção é o resultado de passar a colecção que queremos pesquisar (lista)
 // A resposta do nosso pedido é inserir um item na colecção /criar uma nova
 // A FAZER: CRIAR UMA LISTA DE LISTAS
-async function insertItem(item){
-    const collection = await getCollection(DB_NAME, "lista");
-    const res = await collection.insertOne()
+async function insertList(pedido){
+    const collection = await getCollection(DB_NAME, "Compras");
+    const res = await collection.insertOne([pedido])
+    console.log("Camada final a bombar")
     return res.insertedId
 }
 
 
 
-export default {getCollection, getList, insertItem}
+export default insertList

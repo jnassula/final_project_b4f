@@ -5,7 +5,7 @@ import Objetivo from './pages/objetivos';
 import Lista from './pages/lista';
 import Login from './pages/login';
 import InicioButton from './components/Inicio';
-
+import Compras from './pages/compras';
 
 function App() {
   return (
@@ -15,6 +15,9 @@ function App() {
       <Route exact path="/">
         <Login />
       </Route>
+      <Route path="/compras">
+        <Compras />
+        </Route>
       <Route path="/lista">
         <Lista />
       </Route>
