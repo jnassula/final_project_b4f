@@ -1,39 +1,12 @@
 import express  from "express";
+import listaRouter from '../backend/src/routes/lista'
 const PORT = 3001
 const app = express()
-import {getCollection, insertItem}  from './db.js'
-
-
+// import getCollection from "./src/data/db"
 app.use(express.json())
 
-// Teste back e front
-app.get('/', (req, res) => {
-    res.status(200).json({
-        message: "A comunicar back e front"
-    })
-})
-
-
-// POST para adicionar items à lista
-app.post('/lista', async (req, res) => {
-    try{
-        const lista = await insertItem(req.body)
-        res.status(200).json({lista})
-    }catch(err){
-        console.log(err)
-    }
-})
-
-app.post('/objetivo', async (req, res) => {
-    try{
-        const lista = await insertGoal(req.body)
-        res.status(200).json({lista})
-    }catch(err){
-        console.log(err)
-    }
-})
-
-
+app.get("/", (req, res) => res.status(200).send('A comunicar'))
+app.use("/", listaRouter)
 
 
 app.listen(PORT, () => console.log(`À escuta em ${PORT}`))
