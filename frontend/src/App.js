@@ -1,85 +1,33 @@
-import './App.css';
-import { Formik, Field } from 'formik';
-import React, { useEffect } from 'react';
+
+import React from 'react';
+import {Switch, Route} from "react-router-dom" ;
+import Objetivo from './pages/objetivos';
+import Lista from './pages/lista';
+import Login from './pages/login';
+import InicioButton from './components/Inicio';
 
 
 function App() {
-  const [listaDeItens, updateLista] = React.useState([])
-
-  useEffect(() => {
-    console.log(listaDeItens)
-  }, [listaDeItens])
-
-
-  async function adicionarItem(item){
-    updateLista(prevState => {
-      const novoState = prevState.concat(item)
-      return novoState
-    })
-    console.log("Adicionar item executado")
-  }
-  // Esta função assíncrona vai adicionarItem, recebendo o item. Chama o updateLista, com o estado anterior e fazemos concat ao item recebido pelo POST
-  // Returnamos o novo estado, com o item adicionado.
-  // Esta função é chamada onSubmit (o Formik faz a comunicação)
-
-  function enviarMensagem(){
-    fetch("/mensagem", {
-      method: "POST"
-    }).then(res => res.json()
-    .then(json => console.log(json)))
-    alert("Mensagem enviada a todos os elementos do grupo")
-  }
-
-
-  function displayList(){
-    fetch("/lista", {
-      method: "GET"
-    }).then(res => res.json()
-      .then(json => json.text()))
-  }
-  
-
   return (
     <div className="App">
-      <Formik
-        initialValues={{descricao: "", quantidade: "", unidade: "un"}}
-        onSubmit={(values) => {
-        fetch("/lista", {
-          method: "POST",
-          body: JSON.stringify(values),
-          headers: {
-            "Content-type": "application/json"
-          }
-        }).then(res => res.json()
-        .then(json => adicionarItem(json)))
-      }}
-      >
-      
-      {
-        ({handleSubmit}) => (
-          <form onSubmit={handleSubmit}>
-            <Field name="descricao" required />
-            <Field name="quantidade" type="number" required />
-            <Field name="unidade" as="select" required>
-             <option value="un">UN</option>
-             <option value="kg">KG</option>
-             <option value="lt">LT</option>
-             </Field>
-            <button type = "submit">Adicionar item</button>
-          </form>
-        )
-      }
+      <InicioButton/>
+    <Switch>
+      <Route exact path="/">
+        <Login />
+      </Route>
+      <Route path="/lista">
+        <Lista />
+      </Route>
+      <Route path="/objetivo">
+        <Objetivo />
+      </Route>
 
-      
-      </Formik>
-        <div>
-          <p>{displayList()}</p>
-          <p>
-            <button onClick={enviarMensagem} type = "alert" >Vou às compras</button>
-          </p>
-        </div>
-        
+    </Switch>
+
+
     </div>
+      
+
   );
 }
 

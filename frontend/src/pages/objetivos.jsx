@@ -1,4 +1,3 @@
-import './App.css';
 import { Formik, Field } from 'formik';
 import React, { useEffect } from 'react';
 
@@ -8,7 +7,7 @@ function Objetivo() {
 
 useEffect(() => {
   console.log(listaDeObjetivos)
-}, [listaDeOjetivos])
+})
 
 
   async function adicionarObjetivo(item){
@@ -27,9 +26,9 @@ useEffect(() => {
   return (
     <div className="Objetivo">
       <Formik
-        initialValues={{valor: "", prazo: ""}}
+        initialValues={{descricao: "", valor: "", prazo: ""}}
         onSubmit={(values) => {
-        fetch("/lista", {
+        fetch("/objetivo", {
           method: "POST",
           body: JSON.stringify(values),
           headers: {

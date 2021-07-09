@@ -14,9 +14,10 @@ app.get('/', (req, res) => {
 })
 
 
-app.get('/lista', (req, res) => {
+app.get('/lista/:id', async (req, res) => {
     try{
-        console.log("get lista a funcionar")
+        const listaApresentar = await getList(req.params.id)
+        res.status(200).send(listaApresentar)
     }catch(err){
         console.log(err)
     }
