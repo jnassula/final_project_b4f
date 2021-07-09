@@ -6,9 +6,9 @@ import React, { useEffect } from 'react';
 function App() {
   const [listaDeItens, updateLista] = React.useState([])
 
-useEffect(() => {
-  console.log(listaDeItens)
-}, [listaDeItens])
+  useEffect(() => {
+    console.log(listaDeItens)
+  }, [listaDeItens])
 
 
   async function adicionarItem(item){
@@ -27,6 +27,15 @@ useEffect(() => {
       method: "POST"
     }).then(res => res.json()
     .then(json => console.log(json)))
+    alert("Mensagem enviada a todos os elementos do grupo")
+  }
+
+
+  function displayList(){
+    fetch("/lista", {
+      method: "GET"
+    }).then(res => res.json()
+      .then(json => json.text()))
   }
   
 
@@ -64,10 +73,12 @@ useEffect(() => {
       
       </Formik>
         <div>
+          <p>{displayList()}</p>
           <p>
             <button onClick={enviarMensagem} type = "alert" >Vou às compras</button>
           </p>
         </div>
+        
     </div>
   );
 }

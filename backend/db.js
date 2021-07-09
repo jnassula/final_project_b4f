@@ -34,8 +34,10 @@ export async function getCollection(dbName, colName){
 }
 
 
-export async function getList(colName, id){
-    return db.collection(id)
+export async function getList(id){
+    const collection = await getCollection(DB_NAME, "lista");
+    const identidade = id
+    return collection.identidade
 }
 
 
