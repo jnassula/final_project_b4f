@@ -33,7 +33,6 @@ app.post('/lista', async (req, res) => {
     }
 })
 
-//COMENT TEST
 
 
 app.post('/mensagem', async (req, res) => {
@@ -43,6 +42,18 @@ app.post('/mensagem', async (req, res) => {
         console.log(err)
     }
 })
+
+
+app.post('/objetivo', async (req, res) => {
+    try{
+        const lista = await insertGoal(req.body)
+        res.status(200).json({lista})
+    }catch(err){
+        console.log(err)
+    }
+})
+
+
 
 
 app.listen(PORT, () => console.log(`À escuta em ${PORT}`))
