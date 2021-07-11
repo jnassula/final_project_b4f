@@ -7,9 +7,9 @@
 
 import insertList from '../data/lista'
 
-async function createList(){
+async function createList(nomeDalista){
     console.log("Camada serviços a bombar")
-    return await insertList([])
+    return await insertList(nomeDalista)
     
 }
 
