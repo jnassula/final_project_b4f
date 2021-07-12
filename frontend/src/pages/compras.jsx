@@ -1,12 +1,10 @@
-import { Field } from "formik";
-import { Formik } from "formik";
 import { useEffect, useState } from "react"
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
+import FormularioLista from "../components/formularioLista";
 
 function Compras() {
     // Definimos o nosso state com uma Lista de Compras que começa vazia
     const [listaDeCompras, setListas] = useState([]);
-    const history = useHistory();
 
 
     // Esta função vai fazer um fetch (get/lista) ao backend para mostrar as listas que já temos
@@ -66,33 +64,11 @@ function Compras() {
                     ))
                 }
                 {
-                    <Formik
-                        initialValues={{ Name: "" }}
-                        onSubmit={async (values, { resetForm }) => {
-                            const res = await fetch("/lista", {
-                                method: "POST",
-                                body: JSON.stringify(values),
-                                headers: { "Content-type": "application/json" }
-                            })
-                            if (res.status === 201) {
-                                console.log("o pedido resultou")
-                                const idLista = await res.json()
-                                history.push(`/lista/${idLista.id}`)
-                                // resetForm()
-                                // fetchListas()
 
-                            }
-                        }}
-                    >
-                        {
-                            ({ handleSubmit }) => (
-                                <form onSubmit={handleSubmit}>
-                                    <Field name="Name" required />
-                                    <button type="submit">Criar Lista</button>
-                                </form>
-                            )
-                        }
-                    </Formik>
+                    < FormularioLista />
+
+                   
+
                 }
             </div>
 
@@ -101,33 +77,7 @@ function Compras() {
     } else return (
         <div>
             <h1>Não tem compras planeadas</h1>
-            <Formik
-                initialValues={{ Name: "" }}
-                onSubmit={async (values, { resetForm }) => {
-                    const res = await fetch("/lista", {
-                        method: "POST",
-                        body: JSON.stringify(values),
-                        headers: { "Content-type": "application/json" }
-                    })
-                    if (res.status === 201) {
-                        console.log("o pedido resultou")
-                        const idLista = await res.json()
-                        history.push(`/lista/${idLista.id}`)
-                        resetForm()
-                        fetchListas()
-                    }
-                }}
-            >
-
-                {
-                    ({ handleSubmit }) => (
-                        <form onSubmit={handleSubmit}>
-                            <Field name="Name" required />
-                            <button type="submit">Criar Lista</button>
-                        </form>
-                    )
-                }
-            </Formik>
+            < FormularioLista />
         </div>
     )
 }

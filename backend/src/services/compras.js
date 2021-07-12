@@ -7,7 +7,7 @@ import {deleteListById, findList, insertList} from '../data/compras'
 
 
 export async function displayLists(){
-    return await findList({}, {projection: {name: 0} }
+    return await findList({}, {projection: {Name: 1} }
     );
 }
 

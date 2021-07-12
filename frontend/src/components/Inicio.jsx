@@ -13,7 +13,7 @@ function InicioButton(){
 
     if (location.pathname === "/") return null
     
-    return <button onClick={voltarInicio}>Inicio</button>
+    return <button onClick={voltarInicio}>Voltar atrás</button>
 }
 
 export default InicioButton
