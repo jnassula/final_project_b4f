@@ -14,3 +14,9 @@ export async function findObjective(query, options){
     const objetivos = await collection.find(query, options).toArray();
     return objetivos
 }
+
+export async function deleteObjectiveById(id){
+    const collection = await getCollection ("smartSavings", "Objetivos");
+    const res = await collection.deleteOne({_id: ObjectId(id)})
+    return res.result.ok === 1
+}

@@ -36,7 +36,7 @@ listaRouter.post("/", async (req,res) => {
 listaRouter.delete("/:id", async (req, res) => {
     try{
         const removido = await eraseList(req.params.id)
-        console.log(req.params)
+        // console.log(req.params.id)
         if (removido){
             res.status(200).json()
         }

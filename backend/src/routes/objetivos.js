@@ -1,5 +1,5 @@
 import express from "express"
-import { createObjective, displayObjective } from "../services/objetivos"
+import { createObjective, displayObjective, eraseObjetive } from "../services/objetivos"
 
 const objetivosRouter = express.Router()
 
@@ -23,6 +23,17 @@ objetivosRouter.post("/", async(req,res) => {
             Valor: req.body.valor,
             id: idDoObjetivo
         });
+    }catch(err){
+        console.log(err)
+    }
+})
+
+objetivosRouter.delete("/:id", async (req, res) => {
+    try{
+        const removido = await eraseObjetive(req.params.id)
+        if (removido){
+            res.status(200).json()
+        }
     }catch(err){
         console.log(err)
     }
