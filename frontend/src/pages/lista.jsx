@@ -71,11 +71,8 @@ function Lista (){
               </form>
             )
           }
-    
-          
           </Formik>
             <div>
-              
               <p>
                 <button onClick={enviarMensagem} type = "alert" >Vou às compras</button>
               </p>

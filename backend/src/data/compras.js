@@ -29,15 +29,15 @@ export async function findList(query, options){
 export async function insertList(nomeDalista){
     const collection = await getCollection("smartSavings", "Compras");
     const res = await collection.insertOne(nomeDalista)
-    // console.log(`Camada data a funcionar, lista criada com o id ${res.insertedId}`)
+    // console.log(res)
     return res.insertedId
 }
 
 
-// NOTA: A FAZER DELETE PELO NOME, NÃO PELO ID
+// NOTA: A FAZER DELETE PELO ID
+// Acedemos à colecção que queremos e fazemos delete pelo ObjectId(id)
 export async function deleteListById(id){
     const collection = await getCollection("smartSavings", "Compras");
-    const res = await collection.deleteOne(id)
-    return res
-
+    const res = await collection.deleteOne({_id: ObjectId(id)})
+    return res.result.ok === 1
 }

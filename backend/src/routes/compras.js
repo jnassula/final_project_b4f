@@ -22,7 +22,7 @@ listaRouter.get("/", async (req,res) => {
 listaRouter.post("/", async (req,res) => {
     try{
         const idDaLista = await createList(req.body)
-        // console.log(idDaLista)
+        console.log(req.body)
         res.status(201).json({
             Nome: req.body.Name,
             id: idDaLista
@@ -32,12 +32,14 @@ listaRouter.post("/", async (req,res) => {
     }
 })
 
-// NOTA: A FAZER DELETE PELO NOME, NÃO PELO ID
-listaRouter.delete("/", async (req, res) => {
+// DELETE /lista/:id - Recebe um json com o id e apaga
+listaRouter.delete("/:id", async (req, res) => {
     try{
-        const idARemover = await eraseList(req.body)
-        console.log(idARemover)
-        res.status(200).json(idARemover)
+        const removido = await eraseList(req.params.id)
+        console.log(req.params)
+        if (removido){
+            res.status(200).json()
+        }
     }catch(err){
         console.log(err)
     }
