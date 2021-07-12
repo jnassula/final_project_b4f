@@ -6,16 +6,15 @@ function Objetivo() {
   const [listaDeObjetivos, updateObjetivos] = React.useState([])
 
 useEffect(() => {
-  console.log(listaDeObjetivos)
+  fetchObjetivo()
 })
 
 
-  async function adicionarObjetivo(item){
-    updateObjetivos(prevState => {
-      const novoState = prevState.concat(item)
-      return novoState
-    })
-    console.log("Adicionar objetivo executado")
+  async function fetchObjetivo(){
+    const res = await fetch("/objetivos")
+    const resBody = await res.json();
+    console.log()
+    updateObjetivos(resBody.Objetivos)
   }
   // Esta função assíncrona vai adicionarItem, recebendo o item. Chama o updateLista, com o estado anterior e fazemos concat ao item recebido pelo POST
   // Returnamos o novo estado, com o item adicionado.
@@ -25,26 +24,46 @@ useEffect(() => {
 
   return (
     <div className="Objetivo">
+      <h1>Objetivos</h1>
+      {
+        listaDeObjetivos?.map(lista => (
+          <li key = {lista._id}>
+            {` O seu objetivo é: ${lista.obj}`} <br/>
+            {` A data limite é: ${lista.prazo}`} <br/>
+            {` O valor a atingir é: ${lista.valor}`} <br/>
+            <button>Apagar</button>
+
+
+          </li>
+        ))
+      }
+      <br/>
+
+
+
+      <button onClick={() => fetchObjetivo()}> Actualizar objectivos </button>
+      <button onClick={() => console.log(listaDeObjetivos)}> Console log </button>
+      
       <Formik
-        initialValues={{descricao: "", valor: "", prazo: ""}}
-        onSubmit={(values) => {
-        fetch("/objetivo", {
+        initialValues={{obj: "", prazo: "", valor: ""}}
+        onSubmit={async (objeto) => {
+        const res = await fetch("/objetivos", {
           method: "POST",
-          body: JSON.stringify(values),
+          body: JSON.stringify(objeto),
           headers: {
             "Content-type": "application/json"
           }
         }).then(res => res.json()
-        .then(json => adicionarObjetivo(json)))
+        .then(json => console.log(json)))
       }}
       >
       
       {
         ({handleSubmit}) => (
           <form onSubmit={handleSubmit}>
-            <Field name="descricao" required />
-            <Field name="valor" type="number" required />
-            <Field name="prazo" type="date" required />
+            <Field name="obj" type="text" placeholder="Defina aqui o seu objetivo" required />
+            <Field name="prazo" type="date" placeholder="Data" required />
+            <Field name="valor" placeholder="Quanto quer poupar/juntar?" required />
             <button type = "submit">Adicionar objetivo</button>
           </form> 
         )
