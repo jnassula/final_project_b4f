@@ -1,9 +1,9 @@
 // Serviços/ Camada intermédia:
-// Mostrar produto
-// Criar produto
-// Apagar produto
-// Se conseguirmos, actualizamos o produto
-// Enviamos a mensagem
+// Mostrar produto []
+// Criar produto []
+// Apagar produto []
+// Se conseguirmos, actualizamos o produto []
+// Enviamos a mensagem [X]
 
 import { deleteItemsById, findItems, insertItem } from "../data/lista";
 

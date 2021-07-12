@@ -14,6 +14,8 @@ objetivosRouter.get("/", async (req,res) => {
     }
 })
 
+
+// POST vai criar um novo objectivo
 objetivosRouter.post("/", async(req,res) => {
     try {
         const idDoObjetivo= await createObjective(req.body)
@@ -28,6 +30,8 @@ objetivosRouter.post("/", async(req,res) => {
     }
 })
 
+
+// DELETE vai apagar o objectivo
 objetivosRouter.delete("/:id", async (req, res) => {
     try{
         const removido = await eraseObjetive(req.params.id)

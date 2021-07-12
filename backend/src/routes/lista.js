@@ -1,6 +1,9 @@
 import express from 'express'
 import { createItem, displayItems, eraseItem } from '../services/lista'
 
+// Vamos enviar os items que a lista tem através do /lista/:id/items com um GET para mostrar os produtos
+// Vamos adicionar à lista específica que acedemos (através do ID) com um POST para criar um produto (OBJECTO) e colocá-lo no array ITEMS []
+// Vamos editar o item através de um PATCH
 
 const itemRouter = express.Router()
 

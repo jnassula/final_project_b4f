@@ -1,9 +1,11 @@
 //Objetivos / Camada Intermédia:
-// Mostrar os objetivos
-// Criar os Objetivos
-// Concluir os Objetivos
-// Aapagar os Objetivos
-// Contribuir para os mesmos
+// Mostrar os objetivos [X]
+// Criar os Objetivos [X]
+// Concluir os Objetivos []
+// Apagar os Objetivos [X]
+// Confirmação do apagar objectivos []
+// Wizard de configuração de objectivos []
+// Contribuir para os mesmos e actualizar []
 
 import { insertObjective, findObjective, deleteObjectiveById } from "../data/objetivos";
 

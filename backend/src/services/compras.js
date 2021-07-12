@@ -1,7 +1,8 @@
 // Serviços/ Camada intermédia:
-// Mostrar as listas
-// Criar a lista
-// Apagar a lista
+// Criar a lista [X]
+// Mostrar as listas [X]
+// Apagar a lista [X]
+// Lista em principio concluida
 
 import {deleteListById, findList, insertList} from '../data/compras'
 

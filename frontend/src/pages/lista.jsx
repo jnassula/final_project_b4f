@@ -9,7 +9,7 @@ function Lista (){
 
 
     async function fetchItens(){
-      const res = await fetch("/item")
+      const res = await fetch("/lista/:id")
       const resBody = await res.json();
       console.log(res.body)
       setItens(resBody.itens)
