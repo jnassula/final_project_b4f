@@ -64,7 +64,11 @@ function Compras() {
                     ))
                 }
                 {
+
                     < FormularioLista />
+
+                   
+
                 }
             </div>
 

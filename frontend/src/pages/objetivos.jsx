@@ -10,11 +10,14 @@ function Objetivo() {
   })
 
 
+
   async function fetchObjetivo() {
     const res = await fetch("/objetivos")
     const resBody = await res.json();
     console.log()
     updateObjetivos(resBody.Objetivos)
+
+
   }
   // Esta função assíncrona vai adicionarItem, recebendo o item. Chama o updateLista, com o estado anterior e fazemos concat ao item recebido pelo POST
   // Returnamos o novo estado, com o item adicionado.
@@ -24,6 +27,7 @@ function Objetivo() {
 
   return (
     <div className="Objetivo">
+
       <h1>Objetivos</h1>
       {
         listaDeObjetivos?.map(lista => (
@@ -71,6 +75,34 @@ function Objetivo() {
             </form>
           )
         }
+
+
+
+      <Formik
+        initialValues={{descricao: "", valor: "", prazo: ""}}
+        onSubmit={(values) => {
+        fetch("/objetivo", {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-type": "application/json"
+          }
+        }).then(res => res.json()
+        .then(json => adicionarObjetivo(json)))
+      }}
+      >
+
+        {
+          ({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Field name="descricao" required />
+              <Field name="valor" type="number" required />
+              <Field name="prazo" type="date" required />
+              <button type="submit">Adicionar objetivo</button>
+            </form>
+          )
+        }
+
 
 
       </Formik>
