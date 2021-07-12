@@ -10,7 +10,7 @@ useEffect(() => {
 })
 
 
-  async function adicionarObjetivo(item){
+  async function adicionarObjetivo(item) {
     updateObjetivos(prevState => {
       const novoState = prevState.concat(item)
       return novoState
@@ -38,25 +38,25 @@ useEffect(() => {
         .then(json => adicionarObjetivo(json)))
       }}
       >
-      
-      {
-        ({handleSubmit}) => (
-          <form onSubmit={handleSubmit}>
-            <Field name="descricao" required />
-            <Field name="valor" type="number" required />
-            <Field name="prazo" type="date" required />
-            <button type = "submit">Adicionar objetivo</button>
-          </form> 
-        )
-      }
 
-      
+        {
+          ({ handleSubmit }) => (
+            <form onSubmit={handleSubmit}>
+              <Field name="descricao" required />
+              <Field name="valor" type="number" required />
+              <Field name="prazo" type="date" required />
+              <button type="submit">Adicionar objetivo</button>
+            </form>
+          )
+        }
+
+
       </Formik>
-        <div>
-          <p>
-            <button type = "submit">Contribuir</button>
-          </p>
-        </div>
+      <div>
+        <p>
+          <button type="submit">Contribuir</button>
+        </p>
+      </div>
     </div>
   );
 }
