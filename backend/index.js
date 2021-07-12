@@ -1,7 +1,8 @@
 import express  from "express";
-import listaRouter from '../backend/src/routes/lista'
+import listaRouter from './src/routes/compras'
 const PORT = 3001
 const app = express()
+
 app.use(express.json())
 
 app.get("/", (req, res) => res.status(200).send('A comunicar'))

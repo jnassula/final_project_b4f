@@ -11,17 +11,12 @@ function Login(){
         return newPath
     }
 
-
-    function irLista(){
-        history.push(mudarCaminho("lista"))
-    }
-
     function irObjetivos(){
         history.push(mudarCaminho("objetivo"))
     }
 
     function irCompras(){
-        history.push(mudarCaminho("compras"))
+        history.push(mudarCaminho("lista"))
     }
 
 
@@ -29,7 +24,6 @@ function Login(){
     return (
         <div>
         <h1> Por favor faça login</h1>
-        <button onClick={irLista}>Vá para à lista</button> <br/>
         <button onClick={irObjetivos}>Vá para os objectivos</button> <br/>
         <button onClick={irCompras}>Vá para as suas compras</button>
 

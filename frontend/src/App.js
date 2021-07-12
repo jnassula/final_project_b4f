@@ -15,10 +15,10 @@ function App() {
       <Route exact path="/">
         <Login />
       </Route>
-      <Route path="/compras">
+      <Route exact path="/lista">
         <Compras />
         </Route>
-      <Route path="/lista">
+      <Route path="/lista/:id">
         <Lista />
       </Route>
       <Route path="/objetivo">
