@@ -1,17 +1,28 @@
 import { Formik, Field } from 'formik';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import {useHistory} from 'react-router-dom'
 
 function Lista (){
 
-    const [listaDeItens, updateLista] = React.useState([])
+    const [listaDeItens, setItens] = useState([])
+    const history = useHistory();
+
+
+    async function fetchItens(){
+      const res = await fetch("/item")
+      const resBody = await res.json();
+      console.log(res.body)
+      setItens(resBody.itens)
+    }
 
     useEffect(() => {
-      console.log(listaDeItens)
-    })
+      fetchItens()}, []
+     
+    )
   
   
     async function adicionarItem(item){
-      updateLista(prevState => {
+      setItens(prevState => {
         const novoState = prevState.concat(item)
         return novoState
       })
@@ -32,28 +43,48 @@ function Lista (){
 
     return (
         <div className="App">
-          <>
-          <ul>
+          <div>
+          
             {listaDeItens.map(item => (
               <li
-              key={item.id}
-              ></li>
+              key={item._id}
+              >
+                {item.descricao}{" "}
+                {item.quantidade}
+                {item.unidade}
+                <button 
+                  onClick={async () => {
+                  const res = await fetch(`/item/${item._id}`, {
+                      method: "DELETE"
+                })
+                if (res.status === 200) {
+                  console.log("Item registado")
+                  fetchItens()
+                }
+                }} > Eliminar item</button>
+              </li>
             ))}
-          </ul>
-          </>
+          </div>
     
     
           <Formik
             initialValues={{descricao: "", quantidade: "", unidade: "un"}}
-            onSubmit={(values) => {
-            fetch("/lista", {
+            onSubmit={async (values, {resetForm} ) => {
+            const res = await fetch("/item", {
               method: "POST",
               body: JSON.stringify(values),
               headers: {
                 "Content-type": "application/json"
               }
-            }).then(res => res.json()
-            .then(json => adicionarItem(json)))
+            })
+
+            console.log(res.status)
+            await adicionarItem(values)
+            if (res.status === 201){
+              console.log("Item resultou")
+              resetForm()
+              fetchItens()
+            }
           }}
           >
           
@@ -63,11 +94,11 @@ function Lista (){
                 <Field name="descricao" required />
                 <Field name="quantidade" type="number" required />
                 <Field name="unidade" as="select" required>
-                 <option value="un">UN</option>
-                 <option value="kg">KG</option>
-                 <option value="lt">LT</option>
+                 <option value="un">Un</option>
+                 <option value="kg">Kg</option>
+                 <option value="lt">Lt</option>
                  </Field>
-                <button type = "submit">Adicionar item</button>
+                <button type="submit">Adicionar item</button>
               </form>
             )
           }

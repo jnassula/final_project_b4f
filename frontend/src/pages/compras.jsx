@@ -78,8 +78,8 @@ function Compras() {
                                 console.log("o pedido resultou")
                                 const idLista = await res.json()
                                 history.push(`/lista/${idLista.id}`)
-                                resetForm()
-                                fetchListas()
+                                // resetForm()
+                                // fetchListas()
 
                             }
                         }}
