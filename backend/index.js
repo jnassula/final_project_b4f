@@ -1,4 +1,4 @@
-import express  from "express";
+import express from "express";
 import listaRouter from './src/routes/compras'
 
 import objetivosRouter from "./src/routes/objetivos";
