@@ -20,15 +20,30 @@ function Login(){
         history.push(mudarCaminho("lista"))
     }
 
+    function irCarteira(){
+        history.push(mudarCaminho("saldo"))
+    }
+
 
 
     return (
-        <div>
-        <h1> Por favor faça login</h1>
-        <button onClick={irObjetivos}>Vá para os objectivos</button> <br/>
-        <button onClick={irCompras}>Vá para as suas compras</button>
-
-        </div>
+        <>
+            <div className={styles.telaInicial}>
+                
+                <h1> Olá bla bla bla,</h1>
+                <div className={styles.card}>
+                    <p className={styles.saldo}>saldo</p>
+                    <p className={styles.ultimo}>ultimo</p>
+                    <p className={styles.meta}>meta</p>
+                    <p className={styles.poupança}>poupança</p>
+                </div>
+                <div className={styles.buttons}>
+                    <button onClick={irCarteira}>Vá para Carteira</button> <br/>
+                    <button onClick={irObjetivos}>Vá para os objectivos</button> <br/>
+                    <button onClick={irCompras}>Vá para as suas compras</button>
+                </div>
+            </div>
+        </>
     )
 }
 
