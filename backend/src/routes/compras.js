@@ -32,6 +32,16 @@ listaRouter.post("/", async (req,res) => {
     }
 })
 
+
+listaRouter.post("/:id", async (req, res) => {
+    try{
+        console.log(req.body)
+        res.status(200).json(req.body)
+    }catch(err){
+        console.log(err)
+    }
+})
+
 // DELETE /lista/:id - Recebe um json com o id e apaga
 listaRouter.delete("/:id", async (req, res) => {
     try{
