@@ -41,3 +41,4 @@ export async function deleteListById(id){
     const res = await collection.deleteOne({_id: ObjectId(id)})
     return res.result.ok === 1
 }
+
