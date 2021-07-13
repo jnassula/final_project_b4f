@@ -1,4 +1,3 @@
-import { Formik, Field } from 'formik';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FormularioItem from '../components/FormularioItem';
@@ -7,6 +6,7 @@ import styles from '../styles/Lista.module.css';
 
 function Lista() {
   const [listaDeItens, setItens] = useState([])
+  const [nomePagina, setNomePagina] = useState("")
   const params = useParams();
 
   useEffect(() => {
@@ -28,8 +28,11 @@ function Lista() {
     console.log(id)
     const res = await fetch(`/lista/${id}`)
     const resBody = await res.json();
+    setNomePagina(resBody.name)
     console.log(resBody)
-    setItens(resBody)
+    if(resBody.items){
+      setItens(resBody.items)
+    }
   }
 
   function enviarMensagem() {
@@ -38,11 +41,13 @@ function Lista() {
     }).then(res => res.json()
       .then(json => console.log(json)))
     alert("Mensagem enviada a todos os elementos do grupo")
+    console.log(nomePagina)
   }
 
   if (listaDeItens.length > 0) {
     return (
       <div className="App">
+        <h1>{nomePagina}</h1>
         <div>
           {
             listaDeItens?.map((objeto, i) => (
@@ -69,10 +74,9 @@ function Lista() {
     );
   } else return (
     <div>
-      <h1>Olá</h1>
+      <h1>{nomePagina}</h1>
       <FormularioItem addItem={addItem} />
     </div>
-
   )
 }
 

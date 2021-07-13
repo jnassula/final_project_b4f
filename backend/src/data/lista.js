@@ -32,9 +32,10 @@ export async function insertItem(item, id) {
 
 export async function findItem(idLista) {
     const lista = await findListById(idLista);
+    console.log(lista)
     if (!lista.items) {
-        return false
+        return {name: lista.Name}
     } else {
-        return lista.items
+        return {name: lista.Name, items: lista.items}
     }
 }
