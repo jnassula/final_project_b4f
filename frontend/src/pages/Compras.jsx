@@ -47,7 +47,7 @@ function Compras() {
                     listaDeCompras?.map(lista => (
                         <li key={lista._id}>
                             <Link to={`/lista/${lista._id}`}>
-                                {`${lista.Name}   `}
+                                {`${lista.nameLista}   `}
                             </Link>
                             <button
                                 onClick={async () => {

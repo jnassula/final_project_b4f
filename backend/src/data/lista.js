@@ -34,8 +34,8 @@ export async function findItem(idLista) {
     const lista = await findListById(idLista);
     console.log(lista)
     if (!lista.items) {
-        return {name: lista.Name}
+        return {name: lista.nameLista}
     } else {
-        return {name: lista.Name, items: lista.items}
+        return {name: lista.nameLista, items: lista.items}
     }
 }

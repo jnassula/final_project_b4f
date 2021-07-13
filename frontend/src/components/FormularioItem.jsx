@@ -6,7 +6,10 @@ function FormularioItem({addItem}) {
     return (
         <Formik
             initialValues={{ descricao: "", quantidade: "", unidade: "un" }}
-            onSubmit={(values) => addItem(values)}
+            onSubmit={(values, {resetForm}) => {
+                addItem(values)
+                resetForm()
+            }}
         >
             {
                 ({ handleSubmit }) => (
