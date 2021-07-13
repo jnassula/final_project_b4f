@@ -24,7 +24,7 @@ listaRouter.post("/", async (req,res) => {
         const idDaLista = await createList(req.body)
         console.log(req.body)
         res.status(201).json({
-            Nome: req.body.Name,
+            Nome: req.body.nameLista,
             id: idDaLista
         });
     }catch(err){

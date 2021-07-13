@@ -8,7 +8,6 @@ import { createItem, displayItem } from '../services/lista'
 const listaItemRouter = express.Router()
 
 
-
 listaItemRouter.get("/:id", async (req, res) => {
     try{
         const items = await displayItem(req.params.id)
@@ -23,7 +22,7 @@ listaItemRouter.get("/:id", async (req, res) => {
 listaItemRouter.post("/:id", async (req, res) => {
     try{
         await createItem(req.body, req.params.id)
-        res.status(200).json("Sucesso")
+        res.status(200).json("Item criado com sucesso")
     }catch(err){
         console.log(err)
     }

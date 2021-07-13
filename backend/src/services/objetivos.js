@@ -10,7 +10,7 @@
 import { insertObjective, findObjective, deleteObjectiveById } from "../data/objetivos";
 
 export async function displayObjective() {
-    return await findObjective({}, { projection: { name: 0 } }
+    return await findObjective({}, { projection: { nameLista: 0 } }
     );
 }
 

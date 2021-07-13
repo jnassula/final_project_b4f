@@ -7,7 +7,7 @@ function FormularioLista() {
     const history = useHistory()
     return (
         <Formik
-            initialValues={{ Name: "" }}
+            initialValues={{ nameLista: "" }}
             onSubmit={async (values, { resetForm }) => {
                 const res = await fetch("/lista", {
                     method: "POST",
@@ -27,7 +27,7 @@ function FormularioLista() {
             {
                 ({ handleSubmit }) => (
                     <form onSubmit={handleSubmit}>
-                        <Field name="Name" required />
+                        <Field name="nameLista" required />
                         <button type="submit">Criar Lista</button>
                     </form>
                 )

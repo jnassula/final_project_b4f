@@ -1,117 +1,83 @@
-import { Formik, Field } from 'formik';
 import { useEffect, useState } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import FormularioItem from '../components/FormularioItem';
+
 import styles from '../styles/Lista.module.css';
 
-function Lista (){
+function Lista() {
+  const [listaDeItens, setItens] = useState([])
+  const [nomePagina, setNomePagina] = useState("")
+  const params = useParams();
 
-    const [listaDeItens, setItens] = useState([])
-    const history = useHistory();
+  useEffect(() => {
+    fetchItens(params.id)
+  }, [])
 
+  async function addItem(values) {
+    const res = await fetch(`/lista/${params.id}`, {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
+    return await fetchItens(params.id)
+  }
 
-    async function fetchItens(){
-      const res = await fetch("/lista/:id")
-      const resBody = await res.json();
-      console.log(res.body)
-      setItens(resBody.itens)
+  async function fetchItens(id) {
+    console.log(id)
+    const res = await fetch(`/lista/${id}`)
+    const resBody = await res.json();
+    setNomePagina(resBody.name)
+    console.log(resBody)
+    if(resBody.items){
+      setItens(resBody.items)
     }
+  }
 
-    useEffect(() => {
-      fetchItens()}, []
-     
-    )
-  
-  
-    async function adicionarItem(item){
-      setItens(prevState => {
-        const novoState = prevState.concat(item)
-        return novoState
-      })
-      console.log("Adicionar item executado")
-    }
-    // Esta função assíncrona vai adicionarItem, recebendo o item. Chama o updateLista, com o estado anterior e fazemos concat ao item recebido pelo POST
-    // Returnamos o novo estado, com o item adicionado.
-    // Esta função é chamada onSubmit (o Formik faz a comunicação)
-  
-    function enviarMensagem(){
-      fetch("/mensagem", {
-        method: "POST"
-      }).then(res => res.json()
+  function enviarMensagem() {
+    fetch("/mensagem", {
+      method: "POST"
+    }).then(res => res.json()
       .then(json => console.log(json)))
-      alert("Mensagem enviada a todos os elementos do grupo")
-    }
-  
+    alert("Mensagem enviada a todos os elementos do grupo")
+    console.log(nomePagina)
+  }
 
+  if (listaDeItens.length > 0) {
     return (
-        <div className="App">
-          <div>
-          
-            {listaDeItens.map(item => (
-              <li
-              key={item._id}
-              >
-                {item.descricao}{" "}
-                {item.quantidade}
-                {item.unidade}
-                <button 
-                  onClick={async () => {
-                  const res = await fetch(`/item/${item._id}`, {
-                      method: "DELETE"
-                })
-                if (res.status === 200) {
-                  console.log("Item registado")
-                  fetchItens()
-                }
-                }} > Eliminar item</button>
-              </li>
-            ))}
-          </div>
-    
-    
-          <Formik
-            initialValues={{descricao: "", quantidade: "", unidade: "un"}}
-            onSubmit={async (values, {resetForm} ) => {
-            const res = await fetch("/item", {
-              method: "POST",
-              body: JSON.stringify(values),
-              headers: {
-                "Content-type": "application/json"
-              }
-            })
-
-            console.log(res.status)
-            await adicionarItem(values)
-            if (res.status === 201){
-              console.log("Item resultou")
-              resetForm()
-              fetchItens()
-            }
-          }}
-          >
-          
+      <div className="App">
+        <h1>{nomePagina}</h1>
+        <div>
           {
-            ({handleSubmit}) => (
-              <form onSubmit={handleSubmit}>
-                <Field name="descricao" required />
-                <Field name="quantidade" type="number" required />
-                <Field name="unidade" as="select" required>
-                 <option value="un">Un</option>
-                 <option value="kg">Kg</option>
-                 <option value="lt">Lt</option>
-                 </Field>
-                <button type="submit">Adicionar item</button>
-              </form>
-            )
+            listaDeItens?.map((objeto, i) => (
+              <li key={i}>
+                <br />
+                {` Produto: ${objeto.descricao} `} <br />
+                {` Quantidade: ${objeto.quantidade} `} <br />
+                {` Unidade: ${objeto.unidade} `} <br />
+              </li>
+            ))
           }
-          </Formik>
-            <div>
-              <p>
-                <button onClick={enviarMensagem} type = "alert" >Vou às compras</button>
-              </p>
-            </div>
-            
         </div>
+        <FormularioItem addItem={addItem} />
+
+
+        <div>
+          <p>
+            <button onClick={enviarMensagem} type="alert" >Vou às compras</button>
+          </p>
+        </div>
+      </div>
+
+
     );
+  } else return (
+    <div>
+      <h1>{nomePagina}</h1>
+      <FormularioItem addItem={addItem} />
+    </div>
+  )
 }
 
 export default Lista
