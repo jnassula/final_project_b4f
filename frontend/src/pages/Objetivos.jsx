@@ -1,5 +1,6 @@
 import { Formik, Field } from 'formik';
 import React, { useEffect } from 'react';
+import styles from '../styles/Objetivos.module.css';
 
 
 function Objetivo() {
