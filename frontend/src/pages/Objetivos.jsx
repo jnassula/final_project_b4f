@@ -1,14 +1,14 @@
 import { Formik, Field } from 'formik';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../styles/Objetivos.module.css';
 
 
 function Objetivo() {
-  const [listaDeObjetivos, updateObjetivos] = React.useState([])
+  const [listaDeObjetivos, updateObjetivos] = useState([])
 
   useEffect(() => {
     fetchObjetivo()
-  })
+  }, [])
 
 
 
@@ -17,8 +17,6 @@ function Objetivo() {
     const resBody = await res.json();
     console.log()
     updateObjetivos(resBody.Objetivos)
-
-
   }
   // Esta função assíncrona vai adicionarItem, recebendo o item. Chama o updateLista, com o estado anterior e fazemos concat ao item recebido pelo POST
   // Returnamos o novo estado, com o item adicionado.
