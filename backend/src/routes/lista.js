@@ -3,10 +3,23 @@
 // Vamos editar o item através de um PATCH
 
 import express from 'express'
-import { createItem } from '../services/lista'
+import { createItem, displayItem } from '../services/lista'
 
 const listaItemRouter = express.Router()
 
+
+
+listaItemRouter.get("/:id", async (req, res) => {
+    try{
+        const items = await displayItem(req.params.id)
+        res.status(200).json(items)
+    } catch(err){
+        console.log(err)
+    }
+})
+
+// Criar um novo produto na lista específica (id).
+// Enviamos ao createItem o req.body (com a descricao, quantidade e unidade e o id da lista)
 listaItemRouter.post("/:id", async (req, res) => {
     try{
         await createItem(req.body, req.params.id)

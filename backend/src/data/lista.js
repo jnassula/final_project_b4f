@@ -29,3 +29,9 @@ export async function insertItem(item, id){
     await updateListById(lista);
     return lista
 }
+
+export async function findItem(idLista){
+    const lista = await findListById(idLista);
+    console.log(lista.items)
+    return lista.items
+}
