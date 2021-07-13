@@ -71,7 +71,7 @@ function Objetivo() {
             <form onSubmit={handleSubmit}>
               <Field name="obj" type="text" placeholder="Defina aqui o seu objetivo" required />
               <Field name="prazo" type="date" placeholder="Data" required />
-              <Field name="valor" placeholder="Quanto quer poupar/juntar?" required />
+              <Field name="valor" placeholder="Quanto quer poupar?" required />
               <button type="submit">Adicionar objetivo</button>
             </form>
           )
