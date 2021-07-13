@@ -14,7 +14,6 @@ export async function displayObjective() {
     );
 }
 
-
 export async function createObjective(objObjetivo) {
     return await insertObjective(objObjetivo);
 }

@@ -30,7 +30,7 @@ function Login(){
         <>
             <div className={styles.telaInicial}>
                 
-                <h1> Olá bla bla bla,</h1>
+                <h1> Olá Sr. Poupadinho</h1>
                 <div className={styles.card}>
                     <p className={styles.saldo}>saldo</p>
                     <p className={styles.ultimo}>ultimo</p>
