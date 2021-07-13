@@ -1,6 +1,7 @@
 import { Formik, Field } from 'formik';
 import { useEffect, useState } from 'react';
-import {useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom';
+import styles from '../styles/Lista.module.css';
 
 function Lista (){
 

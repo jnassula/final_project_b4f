@@ -1,11 +1,11 @@
 
 import React from 'react';
 import {Switch, Route} from "react-router-dom" ;
-import Objetivo from './pages/objetivos';
-import Lista from './pages/lista';
-import Login from './pages/login';
+import Objetivo from './pages/Objetivos';
+import Lista from './pages/Lista';
+import Login from './pages/Login';
 import InicioButton from './components/Inicio';
-import Compras from './pages/compras';
+import Compras from './pages/Compras';
 
 function App() {
   return (

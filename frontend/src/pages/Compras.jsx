@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import FormularioLista from "../components/formularioLista";
+import FormularioLista from "../components/FormularioLista";
+import styles from "../styles/Compras.module.css"
 
 function Compras() {
     // Definimos o nosso state com uma Lista de Compras que começa vazia

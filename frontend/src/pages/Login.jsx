@@ -1,4 +1,5 @@
-import { useHistory, useLocation } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom";
+import styles from "../styles/Login.module.css";
 
 function Login(){
 
