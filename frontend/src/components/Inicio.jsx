@@ -1,4 +1,5 @@
 import { useHistory, useLocation } from "react-router-dom";
+import styles from "../styles/Inicio.module.css";
 
 function InicioButton(){
     const location = useLocation()
