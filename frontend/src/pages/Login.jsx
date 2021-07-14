@@ -33,26 +33,27 @@ function Login(){
                 <div className={styles.logo}>
                     <img src="../docs/imagens/logo_transparent.png" /> 
                 </div>
-                <h1> Olá Jonata,</h1>
-                <div className={styles.card}>
-                    <p className={styles.saldo}>saldo</p>
-                    <p className={styles.ultimo}>ultimo</p>
-                    <p className={styles.meta}>meta</p>
-                    <p className={styles.poupança}>poupança</p>
-                </div>
-                <div className={styles.buttons}>
-                    <button onClick={irCarteira}>
-                        
+                <div className={styles.content}>
+                    <h1> Olá Jonata,</h1>
+                    <div className={styles.card}>
+                        <p className={styles.saldo}>saldo</p>
+                        <p className={styles.ultimo}>ultimo</p>
+                        <p className={styles.meta}>meta</p>
+                        <p className={styles.poupança}>poupança</p>
+                    </div>
+                    <div className={styles.buttons}>
+                        <button onClick={irCarteira}> 
                             <img src="../docs/imagens/wallet.png" alt="icon carteira" />
-                        
-                    </button> <br/>
-                    <button onClick={irObjetivos}>
-                        <img src="../docs/imagens/goal.png" alt="icon objetivos" />
                         </button> <br/>
-                    <button onClick={irCompras}>
-                        <img src="../docs/imagens/clipboard.png" alt="icon compras" />
-                    </button>
+                        <button onClick={irObjetivos}>
+                            <img src="../docs/imagens/goal.png" alt="icon objetivos" />
+                            </button> <br/>
+                        <button onClick={irCompras}>
+                            <img src="../docs/imagens/clipboard.png" alt="icon compras" />
+                        </button>
+                    </div>
                 </div>
+                
             </div>
         </>
     )
