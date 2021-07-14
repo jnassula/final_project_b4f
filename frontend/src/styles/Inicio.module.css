@@ -1,0 +1,17 @@
+.voltar {
+    display: flex;
+    justify-content: flex-start;
+    background: #8CC4CE;
+    padding: 15px;
+}
+
+.voltar button {
+    background: none;
+    border: none;
+    border-radius: 8px;
+}
+
+
+.voltar img {
+    width: 32px;
+}

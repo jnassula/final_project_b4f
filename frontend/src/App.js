@@ -11,7 +11,7 @@ import styles from '../src/styles/App.module.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
       <InicioButton />
       <Switch>
         <Route exact path="/">
