@@ -41,32 +41,38 @@ function Compras() {
     // Se tivermos alguma coisa na nossa listaDeCompras (que é um array), vamos mostrá-la
     if (listaDeCompras.length !== 0) {
         return (
-            <div>
-                <h1>Tem estas compras planeadas</h1>
-                {
-                    listaDeCompras?.map(lista => (
-                        <li key={lista._id}>
-                            <Link to={`/lista/${lista._id}`}>
-                                {`${lista.nameLista}   `}
-                            </Link>
-                            <button
-                                onClick={async () => {
-                                    const res = await fetch(`/lista/${lista._id}`, {
-                                        method: "DELETE"
-                                    })
-                                    if (res.status === 200) {
-                                        console.log("Lista eliminada com sucesso");
-                                        fetchListas()
-                                    }
-                                }}>
-                                Eliminar lista
-                            </button>
-                        </li>
-                    ))
-                }
+            <div className={styles.comprasMain}>
+                <div className={styles.compras}>
+                    <h3>Tem estas compras planeadas</h3>
+                    {
+                        listaDeCompras?.map(lista => (
+                            <div className={styles.comprasLista}>
+                                <li key={lista._id}>
+                                <Link to={`/lista/${lista._id}`}>
+                                    {`${lista.nameLista}   `}
+                                </Link>
+                                <button
+                                    onClick={async () => {
+                                        const res = await fetch(`/lista/${lista._id}`, {
+                                            method: "DELETE"
+                                        })
+                                        if (res.status === 200) {
+                                            console.log("Lista eliminada com sucesso");
+                                            fetchListas()
+                                        }
+                                    }}>
+                                    <img src="../docs/imagens/cancel.png" alt="icon cancel" />
+                                </button>
+                            </li>
+                            </div>
+                        ))
+                    } 
+                </div>
+                
+                
                 {
 
-                    < FormularioLista />
+                    < FormularioLista/>
 
                    
 

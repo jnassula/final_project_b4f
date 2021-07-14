@@ -25,29 +25,33 @@ function Objetivo() {
 
 
   return (
-    <div className="Objetivo">
-
-      <h1>Objetivos</h1>
-      {
-        listaDeObjetivos?.map(lista => (
-          <li key={lista._id}>
-            {` O seu objetivo é: ${lista.obj}`} <br />
-            {` A data limite é: ${lista.prazo}`} <br />
-            {` O valor a atingir é: ${lista.valor}`} <br />
-            <button
-            onClick={async () => {
-              const res = await fetch(`/objetivos/${lista._id}`, {
-                method: "DELETE"
-              })
-              if (res.status === 200){
-                console.log("Objetivo eliminado com sucesso");
-                fetchObjetivo()
-              }
-            }}
-            >Apagar</button>
-          </li>
-        ))
-      }
+    <div className={styles.obj_main}>
+      <div className={styles.obj}>
+        <h3>Objetivos</h3>
+        {
+          listaDeObjetivos?.map(lista => (
+            <li key={lista._id} className={styles.obj_list}>
+              {` O seu objetivo é: ${lista.obj}`} <br />
+              {` A data limite é: ${lista.prazo}`} <br />
+              {` O valor a atingir é: ${lista.valor}`} <br />
+              <button
+              onClick={async () => {
+                const res = await fetch(`/objetivos/${lista._id}`, {
+                  method: "DELETE"
+                })
+                if (res.status === 200){
+                  console.log("Objetivo eliminado com sucesso");
+                  fetchObjetivo()
+                }
+              }}
+              >
+                Apagar
+              </button>
+            </li>
+          ))
+        }
+      </div>
+      
       <br />
 
       <Formik
@@ -83,5 +87,5 @@ function Objetivo() {
     </div>
   );
 }
-
+ 
 export default Objetivo;

@@ -14,7 +14,13 @@ function InicioButton(){
 
     if (location.pathname === "/") return null
     
-    return <button onClick={voltarInicio}>Voltar atrás</button>
+    return (
+        <div className={styles.voltar}>
+            <button onClick={voltarInicio}>
+                <img src="../docs/imagens/back-arrow.png" alt="voltar" />
+            </button>
+        </div>
+    )
 }
 
 export default InicioButton

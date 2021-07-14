@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import styles from '../styles/Carteira.module.css';
 
 
 
@@ -18,9 +19,27 @@ function Carteira() {
 
     return (
         <div className="Carteira">
-            <h1>
-                Saldo
-            </h1>
+            <div className={styles.saldo}>
+                <p>
+                    Saldo total
+                </p>
+                <div className={styles.add}>
+                   <button 
+                onClick={async () =>{
+                    const res = await fetch(`/saldo`, {
+                        method: 'POST'
+                    })
+                    if (res.status === 200) {
+                        fetchSaldo()
+                    }
+                    }}>
+                        <img src="../docs/imagens/money.png" alt="icon money" />
+                        Adicionar
+                    </button> 
+                </div>
+                
+            </div>
+            
             {
                 saldoEmCarteira?.map(saldo => (
                     <li key={saldo._id}>
@@ -32,17 +51,7 @@ function Carteira() {
 
                 ))
             }
-            <button 
-                onClick={async () =>{
-                    const res = await fetch(`/saldo`, {
-                        method: 'POST'
-                    })
-                    if (res.status === 200) {
-                        fetchSaldo()
-                    }
-                }}>
-                    Adicionar
-            </button>
+            
         </div>
     )
 }

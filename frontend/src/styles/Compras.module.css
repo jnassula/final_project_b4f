@@ -1,0 +1,38 @@
+.comprasMain {
+    background: #303B9F;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-top: 20%;
+    height: 30vh;
+    
+}
+
+.compras li {
+    list-style-type: none;
+}
+
+.compras a {
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.comprasLista {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.comprasLista button {
+    
+    border: none;
+    background: none;
+}
+
+.comprasLista img {
+    max-width: 18px;
+}

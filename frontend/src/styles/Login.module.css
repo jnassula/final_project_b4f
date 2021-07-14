@@ -1,16 +1,20 @@
 * {
+        
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
 
+
 .telaInicial {
     background: #FCFFF7;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    width:100vw;
+    height: 100vh;
+    
 }
 
 .card{
@@ -55,21 +59,46 @@
     background: #16bac5;
 }
 
+
 .buttons {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin-top: 50px;
 
+    
+
+}
+
+.logo {
+    height: 20vh;
+    margin-bottom: 30px;
+
+}
+
+.logo img {
+    width: 80%;
+    height: 30vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.buttons img{
+    max-width: 27px;
 }
 
 .buttons button {
     padding: 20px;
     border-radius: 15px;
-    background: #000000;
-    color: #FFFFFF;
+    background: #00000000;
+    color: #000000;
     font-weight: bold;
-    width: 265px;
+    width: 80px;
+    margin: 5px;
 }
 
 
