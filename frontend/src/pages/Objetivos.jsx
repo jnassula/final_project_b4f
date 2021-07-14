@@ -1,31 +1,54 @@
 import { Formik, Field } from 'formik';
 import React, { useEffect, useState } from 'react';
 import styles from '../styles/Objetivos.module.css';
+import { useParams } from 'react-router';
+import { useHistory } from 'react-router';
 
 
 function Objetivo() {
   const [listaDeObjetivos, updateObjetivos] = useState([])
+  const params = useParams();
+  const history = useHistory();
+
 
   useEffect(() => {
     fetchObjetivo()
   }, [])
 
 
+  function wizardObjetivo() {
+    history.push("/objetivoWizard")
+  }
 
+
+  // Função assíncrona responsável por ir buscar ao back-end os objectivos. 
+  // Vai actualizar (updateObjetivos) com o que recebe do backend no resBody.Objetivos
   async function fetchObjetivo() {
     const res = await fetch("/objetivos")
     const resBody = await res.json();
-    console.log()
     updateObjetivos(resBody.Objetivos)
   }
-  // Esta função assíncrona vai adicionarItem, recebendo o item. Chama o updateLista, com o estado anterior e fazemos concat ao item recebido pelo POST
-  // Returnamos o novo estado, com o item adicionado.
-  // Esta função é chamada onSubmit (o Formik faz a comunicação)
 
+
+
+
+  async function deleteObjetivo(id) {
+    const res = await fetch(`/objetivos/${id}`, {
+      method: "DELETE"
+    })
+    if (res.status === 200) {
+      console.log(`Objectivo eliminado com sucesso`)
+      fetchObjetivo()
+    }
+  }
 
 
   return (
     <div className="Objetivo">
+      <button
+        onClick={() => wizardObjetivo()}
+      > Criar Objetivo
+      </button>
 
       <h1>Objetivos</h1>
       {
@@ -35,15 +58,7 @@ function Objetivo() {
             {` A data limite é: ${lista.prazo}`} <br />
             {` O valor a atingir é: ${lista.valor}`} <br />
             <button
-            onClick={async () => {
-              const res = await fetch(`/objetivos/${lista._id}`, {
-                method: "DELETE"
-              })
-              if (res.status === 200){
-                console.log("Objetivo eliminado com sucesso");
-                fetchObjetivo()
-              }
-            }}
+              onClick={() => deleteObjetivo(lista._id)}
             >Apagar</button>
           </li>
         ))

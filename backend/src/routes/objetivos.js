@@ -20,7 +20,7 @@ function tratarDatas(prazo){
         const mesesRestantes = differenceInCalendarMonths(dataTratar, agora)
         const semanasRestantes = differenceInCalendarWeeks(dataTratar, agora)
         const diasRestantes = differenceInCalendarDays(dataTratar, agora)
-        console.log(mesesRestantes, semanasRestantes, diasRestantes)
+        console.log({mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes})
 }
 
 // POST vai criar um novo objectivo
