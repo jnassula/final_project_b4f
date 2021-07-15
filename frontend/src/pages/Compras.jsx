@@ -42,16 +42,21 @@ function Compras() {
     if (listaDeCompras.length !== 0) {
         return (
             <div className={styles.comprasMain}>
-                <div className={styles.compras}>
+                <div className={styles.comprasHeader}>
                     <h3>Tem estas compras planeadas</h3>
-                    {
-                        listaDeCompras?.map(lista => (
-                            <div className={styles.comprasLista}>
-                                <li key={lista._id}>
-                                <Link to={`/lista/${lista._id}`}>
-                                    {`${lista.nameLista}   `}
-                                </Link>
-                                <button
+                </div>
+                <div className={styles.compras}>
+                    
+                    <div className={styles.comprasLista}>
+                        {
+                            listaDeCompras?.map(lista => (
+                                <div className={styles.listas}>
+                                    <li key={lista._id}>
+                                        <Link to={`/lista/${lista._id}`}>
+                                            {`${lista.nameLista}   `}
+                                        </Link>
+                                    </li>
+                                    <button
                                     onClick={async () => {
                                         const res = await fetch(`/lista/${lista._id}`, {
                                             method: "DELETE"
@@ -62,21 +67,19 @@ function Compras() {
                                         }
                                     }}>
                                     <img src="../docs/imagens/cancel.png" alt="icon cancel" />
-                                </button>
-                            </li>
-                            </div>
-                        ))
-                    } 
+                                    </button>
+                                </div>
+                                    
+                                
+                            ))
+                        }
+                    </div> 
+                    {
+                        < FormularioLista/>
+                    }
                 </div>
                 
                 
-                {
-
-                    < FormularioLista/>
-
-                   
-
-                }
             </div>
 
         )

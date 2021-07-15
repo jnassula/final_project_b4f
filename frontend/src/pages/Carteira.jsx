@@ -33,7 +33,7 @@ function Carteira() {
                         fetchSaldo()
                     }
                     }}>
-                        <img src="../docs/imagens/money.png" alt="icon money" />
+                        <img src="../docs/imagens/euro.png" alt="icon euro" />
                         Adicionar
                     </button> 
                 </div>
