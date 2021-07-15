@@ -22,6 +22,7 @@ function ObjetivoTargetWizard() {
         console.log(event)
         setObjetivo(event.target.value)
         event.preventDefault()
+        //Laa
       }
 
     function DefinirObjetivo({handleSubmit, setObjetivo}) {
