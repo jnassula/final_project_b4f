@@ -46,8 +46,8 @@ function Compras() {
                     <h3>Tem estas compras planeadas</h3>
                     {
                         listaDeCompras?.map(lista => (
-                            <div className={styles.comprasLista}>
-                                <li key={lista._id}>
+                            <div key={lista._id} className={styles.comprasLista}>
+                                <li >
                                 <Link to={`/lista/${lista._id}`}>
                                     {`${lista.nameLista}   `}
                                 </Link>

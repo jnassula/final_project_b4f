@@ -1,41 +1,69 @@
 import express from "express"
 import { createObjective, displayObjective, eraseObjetive } from "../services/objetivos"
-import { differenceInCalendarDays, differenceInCalendarWeeks, differenceInCalendarMonths } from 'date-fns'
+import { differenceInCalendarDays, differenceInWeeks, differenceInMonths } from 'date-fns'
 const objetivosRouter = express.Router()
 
+// Esta função recebe o prazo do Objetivo (já como data):
+// Calcula a diferença em dias meses e dias entre o prazoobjetivo e o momento actual (em que a função acontece)
+function tratarDatas(prazoObjetivo) {
+    const agora = new Date()
+    const mesesRestantes = differenceInMonths(prazoObjetivo, agora)
+    const semanasRestantes = differenceInWeeks(prazoObjetivo, agora)
+    const diasRestantes = differenceInCalendarDays(prazoObjetivo, agora)
+
+    return ({ mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes })
+}
+
+// Se existir valorDiario, vai retornar o valor a contribuir diariamente, e a mesma coisa para o valorSemanal e o valorMensal
+function escolhasUtilizador(tempoRestante, valor) {
+    // A REVER
+    const valorDiario = Math.floor(valor / tempoRestante.diasRestantes)
+    const valorSemanal = Math.floor(valor / tempoRestante.semanasRestantes)
+    const valorMensal = Math.floor(valor / tempoRestante.mesesRestantes)
+
+    if (tempoRestante.mesesRestantes === 0 && tempoRestante.semanasRestantes === 0) {
+        return { valorDiario: valorDiario, dias: tempoRestante.diasRestantes }
+    } else if (tempoRestante.mesesRestantes === 0) {
+        return { valorSemanal: valorSemanal, semanas: tempoRestante.semanasRestantes, valorDiario: valorDiario, dias: tempoRestante.diasRestantes }
+    } else return { valorMensal: valorMensal, meses: tempoRestante.mesesRestantes, valorSemanal: valorSemanal, semanas: tempoRestante.semanasRestantes, valorDiario: valorDiario, dias: tempoRestante.diasRestantes }
+}
+
+
 // GET /objetivos - Retorna todas os objetivos
-objetivosRouter.get("/", async (req,res) => {
-    try{
+objetivosRouter.get("/", async (req, res) => {
+    try {
         res.status(200).json({
             Objetivos: await displayObjective()
         })
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
 })
 
-function tratarDatas(prazo){
-        const dataTratar = new Date(prazo)
-        const agora = new Date()
-        const mesesRestantes = differenceInCalendarMonths(dataTratar, agora)
-        const semanasRestantes = differenceInCalendarWeeks(dataTratar, agora)
-        const diasRestantes = differenceInCalendarDays(dataTratar, agora)
-        console.log({mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes})
-}
+// POST com /wizard - Retorna as opções de objetivos
+objetivosRouter.post("/wizard", async (req, res) => {
+    try {
+        const dataObjetivo = new Date(req.body.data)
+        const objTempo = tratarDatas(dataObjetivo)
+        res.status(200).json(escolhasUtilizador(objTempo, req.body.valor))
+    } catch (err) {
+        console.log(err)
+    }
+})
 
 // POST vai criar um novo objectivo
-objetivosRouter.post("/", async(req,res) => {
+objetivosRouter.post("/", async (req, res) => {
     try {
-        const idDoObjetivo= await createObjective(req.body)
+        const idDoObjetivo = await createObjective(req.body)
         tratarDatas(req.body.prazo)
-        
+
         res.status(201).json({
             Objetivo: req.body.obj,
             Prazo: req.body.prazo,
             Valor: req.body.valor,
             id: idDoObjetivo
         });
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
 })
@@ -43,12 +71,12 @@ objetivosRouter.post("/", async(req,res) => {
 
 // DELETE vai apagar o objectivo
 objetivosRouter.delete("/:id", async (req, res) => {
-    try{
+    try {
         const removido = await eraseObjetive(req.params.id)
-        if (removido){
+        if (removido) {
             res.status(200).json()
         }
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
 })
