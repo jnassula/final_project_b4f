@@ -1,6 +1,7 @@
 import { useHistory, useLocation } from "react-router-dom";
 import styles from "../styles/Login.module.css";
 
+
 function Login(){
 
     const location = useLocation();
@@ -29,19 +30,30 @@ function Login(){
     return (
         <>
             <div className={styles.telaInicial}>
+                <div className={styles.logo}>
+                    <img src="../docs/imagens/logo_transparent.png" /> 
+                </div>
+                <div className={styles.content}>
+                    <h1> Olá Jonata,</h1>
+                    <div className={styles.card}>
+                        <p className={styles.saldo}>saldo</p>
+                        <p className={styles.ultimo}>ultimo</p>
+                        <p className={styles.meta}>meta</p>
+                        <p className={styles.poupança}>poupança</p>
+                    </div>
+                    <div className={styles.buttons}>
+                        <button onClick={irCarteira}> 
+                            <img src="../docs/imagens/wallet.png" alt="icon carteira" />
+                        </button> <br/>
+                        <button onClick={irObjetivos}>
+                            <img src="../docs/imagens/goal.png" alt="icon objetivos" />
+                            </button> <br/>
+                        <button onClick={irCompras}>
+                            <img src="../docs/imagens/clipboard.png" alt="icon compras" />
+                        </button>
+                    </div>
+                </div>
                 
-                <h1> Olá Sr. Poupadinho</h1>
-                <div className={styles.card}>
-                    <p className={styles.saldo}>saldo</p>
-                    <p className={styles.ultimo}>ultimo</p>
-                    <p className={styles.meta}>meta</p>
-                    <p className={styles.poupança}>poupança</p>
-                </div>
-                <div className={styles.buttons}>
-                    <button onClick={irCarteira}>Vá para Carteira</button> <br/>
-                    <button onClick={irObjetivos}>Vá para os objectivos</button> <br/>
-                    <button onClick={irCompras}>Vá para as suas compras</button>
-                </div>
             </div>
         </>
     )

@@ -1,0 +1,17 @@
+.obj {
+    background: #303B9F;
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-top: 20%;
+    height: 30vh;
+    
+}
+
+.obj_list {
+    list-style-type: none;
+    
+}
