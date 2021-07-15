@@ -7,7 +7,9 @@ import Login from './pages/Login';
 import Carteira from './pages/Carteira';
 import InicioButton from './components/Inicio';
 import Compras from './pages/Compras';
+import ObjetivoTargetWizard from './components/ObjectivoTargetWizard'
 import styles from '../src/styles/App.module.css';
+
 
 function App() {
   return (
@@ -25,6 +27,9 @@ function App() {
         </Route>
         <Route path="/objetivo">
           <Objetivo />
+        </Route>
+        <Route path="/objetivoWizard">
+          <ObjetivoTargetWizard />
         </Route>
         <Route path="/saldo">
           <Carteira />
