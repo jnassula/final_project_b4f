@@ -44,19 +44,14 @@ function Compras() {
             <div className={styles.comprasMain}>
                 <div className={styles.comprasHeader}>
                     <h3>Tem estas compras planeadas</h3>
-                </div>
-                <div className={styles.compras}>
-                    
-                    <div className={styles.comprasLista}>
-                        {
-                            listaDeCompras?.map(lista => (
-                                <div className={styles.listas}>
-                                    <li key={lista._id}>
-                                        <Link to={`/lista/${lista._id}`}>
-                                            {`${lista.nameLista}   `}
-                                        </Link>
-                                    </li>
-                                    <button
+                    {
+                        listaDeCompras?.map(lista => (
+                            <div key={lista._id} className={styles.comprasLista}>
+                                <li >
+                                <Link to={`/lista/${lista._id}`}>
+                                    {`${lista.nameLista}   `}
+                                </Link>
+                                <button
                                     onClick={async () => {
                                         const res = await fetch(`/lista/${lista._id}`, {
                                             method: "DELETE"
@@ -68,19 +63,17 @@ function Compras() {
                                     }}>
                                     <img src="../docs/imagens/cancel.png" alt="icon cancel" />
                                     </button>
-                                </div>
+                                </li>    
+                            </div>
                                     
                                 
-                            ))
-                        }
+                        ))
+                    }
                     </div> 
                     {
-                        < FormularioLista/>
+                        <FormularioLista />
                     }
-                </div>
-                
-                
-            </div>
+            </div>   
 
         )
         // Se ainda não existir nada na nossa listaDeCompras, retornamos uma página só com o forumlário para criar uma lista

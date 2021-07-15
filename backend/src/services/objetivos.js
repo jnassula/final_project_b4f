@@ -22,3 +22,4 @@ export async function createObjective(objObjetivo) {
 export async function eraseObjetive(id) {
     return await deleteObjectiveById(id);
 }
+

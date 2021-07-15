@@ -12,7 +12,6 @@ app.get("/", (req, res) => res.status(200).send('A comunicar'))
 
 app.use("/lista", listaRouter)
 app.use("/lista", listaItemRouter)
-
 app.use('/objetivos', objetivosRouter)
 
 
