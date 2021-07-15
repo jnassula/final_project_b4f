@@ -1,5 +1,4 @@
-import { Field } from "formik"
-import { Formik } from "formik"
+import { Field, Formik } from "formik"
 import { useHistory } from "react-router";
 import styles from "../styles/FormularioLista.module.css";
 

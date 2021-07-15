@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FormularioItem from '../components/FormularioItem';
-
 import styles from '../styles/Lista.module.css';
 
 function Lista() {
