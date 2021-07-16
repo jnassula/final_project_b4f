@@ -56,7 +56,7 @@ objetivosRouter.post("/", async (req, res) => {
     try {
         const idDoObjetivo = await createObjective(req.body)
         tratarDatas(req.body.prazo)
-
+        
         res.status(201).json({
             Objetivo: req.body.obj,
             Prazo: req.body.prazo,

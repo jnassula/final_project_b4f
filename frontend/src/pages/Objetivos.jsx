@@ -54,42 +54,24 @@ function Objetivo() {
       {
         listaDeObjetivos?.map(lista => (
           <li key={lista._id}>
-            {` O seu objetivo é: ${lista.obj}`} <br />
+            {` O seu objetivo é: ${lista.objetivo}`} <br />
+            <p> O seu objetivo é {lista.objetivo} </p>
             {` A data limite é: ${lista.prazo}`} <br />
-            {` O valor a atingir é: ${lista.valor}`} <br />
+            {` O valor a atingir é: ${lista.valorAtingir}`} <br />
+            <p>  </p>
+            <p> Está a {lista.qtdContribuicoes === 1 ? 1 + " contribuição" : `${lista.qtdContribuicoes} contribuições`} de atingir o seu objetivo! </p>
+            {` O valor a atingir é: ${lista.valorAtingir}`} <br />
+
             <button
               onClick={() => deleteObjetivo(lista._id)}
-            >Apagar</button>
+            >
+              Apagar
+            </button>
+            <button type="submit">Contribuir</button>
           </li>
         ))
       }
       <br />
-
-      <Formik
-        initialValues={{ obj: "", prazo: "", valor: "" }}
-        onSubmit={async (objeto, { resetForm }) => {
-          const res = await fetch("/objetivos", {
-            method: "POST",
-            body: JSON.stringify(objeto),
-            headers: {
-              "Content-type": "application/json"
-            }
-          }).then(res => res.json()
-            .then(json => resetForm()))
-        }}
-      >
-
-        {
-          ({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-              <Field name="obj" type="text" placeholder="Defina aqui o seu objetivo" required />
-              <Field name="prazo" type="date" placeholder="Data" required />
-              <Field name="valor" placeholder="Quanto quer poupar?" required />
-              <button type="submit">Adicionar objetivo</button>
-            </form>
-          )
-        }
-      </Formik>
       <div>
         <p>
           <button type="submit">Contribuir</button>
@@ -98,5 +80,5 @@ function Objetivo() {
     </div>
   );
 }
- 
+
 export default Objetivo;
