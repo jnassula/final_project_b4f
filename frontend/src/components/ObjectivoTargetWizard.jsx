@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 //     // Vamos enviar o obj dadosFinais com o GET e a resposta que temos são os cálculos
 //     // {valorDiário: X
@@ -71,7 +71,42 @@ function DefinirData({ data, setData, handleSubmit, setOpcoes, objetivo, valor }
 }
 
 
-function EscolhaOpçoes({ opcoes, escolhasUtilizador, setEscolhasUtilizador }) {
+function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, setEscolhasUtilizador }) {
+
+    const [loading, setLoading] = useState(true)
+    const [opcaoFinal, setOpcaoFinal] = useState("")
+
+
+    function tratarObjetivo() {
+        if (opcaoFinal === "diario") {
+            return {
+                valorAtingir: valor,
+                prazo: data,
+                objetivo: objetivo,
+                valorContribuicoes: escolhasUtilizador.valorDiario,
+                qtdContribuicoes: escolhasUtilizador.dias,
+                frequenciaContribuicoes: opcaoFinal
+            }
+        } else if (opcaoFinal === "semanal") {
+            return {
+                valorAtingir: valor,
+                prazo: data,
+                objetivo: objetivo,
+                valorContribuicoes: escolhasUtilizador.valorSemanal,
+                qtdContribuicoes: escolhasUtilizador.semanas,
+                frequenciaContribuicoes: opcaoFinal
+            }
+        } else if (opcaoFinal === "mensal") {
+            return {
+                valorAtingir: valor,
+                prazo: data,
+                objetivo: objetivo,
+                valorContribuicoes: escolhasUtilizador.valorMensal,
+                qtdContribuicoes: escolhasUtilizador.meses,
+                frequenciaContribuicoes: opcaoFinal
+            }
+        }
+    }
 
     async function fetchEscolhas() {
         try {
@@ -82,27 +117,79 @@ function EscolhaOpçoes({ opcoes, escolhasUtilizador, setEscolhasUtilizador }) {
             })
             const json = await res.json()
             setEscolhasUtilizador(json)
+            setLoading(false)
         } catch (err) {
             console.log(err)
         }
     }
 
-    function consoleLog() {
-        fetchEscolhas();
-        console.log(escolhasUtilizador)
+    async function criarObjetivo(event) {
+        event.preventDefault();
+        const objetivoFinal = tratarObjetivo();
+        console.log(objetivoFinal)
+        console.log("criarObjetivo a funcionar")
+        try {
+            const res = await fetch("/objetivos", {
+                method: "POST",
+                body: JSON.stringify(objetivoFinal),
+                headers: { "Content-type": "application/json" }
+            })
+            const json = await res.json();
+            console.log(json)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
-    if (escolhasUtilizador && escolhasUtilizador.valorMensal) {
+    useEffect(() => {
+        fetchEscolhas();
+    }, [])
+
+    function consoleLog() {
+        console.log(escolhasUtilizador)
+        console.log(opcaoFinal)
+    }
+
+    if (loading) {
+        return <h1> Por favor aguarde</h1>
+    } else if (escolhasUtilizador && escolhasUtilizador.valorMensal) {
+        // console.log(escolhasUtilizador)
         return (
             <div>
                 <h1> Escolhe a tua opção: </h1>
-                <p>{escolhasUtilizador.valorDiario}</p>
-                <p>{escolhasUtilizador.valorSemanal}</p>
-                <p>{escolhasUtilizador.valorMensal}</p>
+
+                <form onSubmit={(e) => criarObjetivo(e)}>
+                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ? <br />
+                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} semanas ? <br />
+                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("mensal")} value={escolhasUtilizador.valorMensal} /> Prefere poupar {escolhasUtilizador.valorMensal} euros durante {escolhasUtilizador.meses} {escolhasUtilizador.meses > 1 ? "meses" : "mês"} ?
+                    <button type="submit">Finalizar</button>
+                </form>
+                <button onClick={() => consoleLog()}>consolelog</button>
+
+            </div>
+        )
+    } else if (escolhasUtilizador && escolhasUtilizador.valorSemanal) {
+        return (
+            <div>
+                <h1> Escolhe a tua opção: </h1>
+                <form onSubmit={(e) => criarObjetivo(e)}>
+                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ?<br />
+                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} {escolhasUtilizador.semanas > 1 ? "semanas" : "semana"}?
+                    <button type="submit">Finalizar</button>
+                </form>
                 <button onClick={() => consoleLog()}>consolelog</button>
             </div>
         )
-    } else return <button onClick={() => consoleLog()}>consolelog</button>
+    } else return (
+        <div>
+            <h1> A melhor maneira de poupar para o seu objetivo é: </h1>
+            <form onSubmit={(e) => criarObjetivo(e)}>
+                <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} {escolhasUtilizador.dias > 1 ? "dias" : "dia"}.
+                <button type="submit">Finalizar</button>
+            </form>
+            <button onClick={() => consoleLog()}>consolelog</button>
+        </div>
+    )
 }
 
 
@@ -136,7 +223,7 @@ function ObjetivoTargetWizard() {
     } else if (ecra === 2) {
         return <DefinirData setData={setData} opcoes={opcoes} setOpcoes={setOpcoes} data={data} objetivo={objetivo} valor={valor} handleSubmit={handleSubmit} />
     } else if (ecra === 3) {
-        return <EscolhaOpçoes opcoes={opcoes} escolhasUtilizador={escolhasUtilizador} setEscolhasUtilizador={setEscolhasUtilizador} />
+        return <EscolhaOpçoes valor={valor} data={data} objetivo={objetivo} opcoes={opcoes} escolhasUtilizador={escolhasUtilizador} setEscolhasUtilizador={setEscolhasUtilizador} />
     }
 }
 
