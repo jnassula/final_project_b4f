@@ -1,15 +1,16 @@
 import express from "express"
 import { createObjective, displayObjective, eraseObjetive } from "../services/objetivos"
-import { differenceInCalendarDays, differenceInWeeks, differenceInMonths } from 'date-fns'
+import { differenceInCalendarDays, differenceInWeeks, differenceInMonths, parseISO } from 'date-fns'
 const objetivosRouter = express.Router()
 
 // Esta função recebe o prazo do Objetivo (já como data):
-// Calcula a diferença em dias meses e dias entre o prazoobjetivo e o momento actual (em que a função acontece)
-function tratarDatas(prazoObjetivo) {
+// Calcula a diferença em dias meses e dias entre o prazoObjetivo e o momento actual (em que a função acontece)
+function tratarDatas(prazoEmString) {
     const agora = new Date()
+    const prazoObjetivo = new Date(prazoEmString)
     const mesesRestantes = differenceInMonths(prazoObjetivo, agora)
     const semanasRestantes = differenceInWeeks(prazoObjetivo, agora)
-    const diasRestantes = differenceInCalendarDays(prazoObjetivo, agora)
+    const diasRestantes = differenceInCalendarDays(prazoObjetivo, agora)    
 
     return ({ mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes })
 }
@@ -40,6 +41,14 @@ objetivosRouter.get("/", async (req, res) => {
     }
 })
 
+
+// PATCH /objetivos - Vai encontrar o objetivo por id e actualizar o valorContribuido se já existir ou então criá-lo
+objetivosRouter.patch("/", async (req, res) => {
+    
+})
+
+
+
 // POST com /wizard - Retorna as opções de objetivos
 objetivosRouter.post("/wizard", async (req, res) => {
     try {
@@ -55,7 +64,6 @@ objetivosRouter.post("/wizard", async (req, res) => {
 objetivosRouter.post("/", async (req, res) => {
     try {
         const idDoObjetivo = await createObjective(req.body)
-        tratarDatas(req.body.prazo)
         
         res.status(201).json({
             Objetivo: req.body.obj,

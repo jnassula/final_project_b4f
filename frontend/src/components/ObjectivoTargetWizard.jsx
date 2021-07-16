@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { useHistory } from 'react-router';
+
 
 //     // Vamos enviar o obj dadosFinais com o GET e a resposta que temos são os cálculos
 //     // {valorDiário: X
@@ -73,9 +75,13 @@ function DefinirData({ data, setData, handleSubmit, setOpcoes, objetivo, valor }
 
 function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, setEscolhasUtilizador }) {
 
-    const [loading, setLoading] = useState(true)
-    const [opcaoFinal, setOpcaoFinal] = useState("")
+    const [loading, setLoading] = useState(true);
+    const [opcaoFinal, setOpcaoFinal] = useState("");
+    const history = useHistory();
 
+    function voltarObjetivo(){
+        history.push("objetivo")
+    }
 
     function tratarObjetivo() {
         if (opcaoFinal === "diario") {
@@ -136,6 +142,7 @@ function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, set
             })
             const json = await res.json();
             console.log(json)
+            voltarObjetivo();
         } catch (err) {
             console.log(err)
         }
