@@ -1,5 +1,5 @@
 import express from "express"
-import { createObjective, displayObjective, eraseObjetive } from "../services/objetivos"
+import { createObjective, displayObjective, displayObjectiveById, eraseObjetive, updateObjectiveById } from "../services/objetivos"
 import { differenceInCalendarDays, differenceInWeeks, differenceInMonths, parseISO } from 'date-fns'
 const objetivosRouter = express.Router()
 
@@ -10,7 +10,7 @@ function tratarDatas(prazoEmString) {
     const prazoObjetivo = new Date(prazoEmString)
     const mesesRestantes = differenceInMonths(prazoObjetivo, agora)
     const semanasRestantes = differenceInWeeks(prazoObjetivo, agora)
-    const diasRestantes = differenceInCalendarDays(prazoObjetivo, agora)    
+    const diasRestantes = differenceInCalendarDays(prazoObjetivo, agora)
 
     return ({ mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes })
 }
@@ -43,8 +43,25 @@ objetivosRouter.get("/", async (req, res) => {
 
 
 // PATCH /objetivos - Vai encontrar o objetivo por id e actualizar o valorContribuido se já existir ou então criá-lo
-objetivosRouter.patch("/", async (req, res) => {
-    
+objetivosRouter.patch("/:id", async (req, res) => {
+    const objetivoActualizar = await displayObjectiveById(req.params.id)
+    console.log(objetivoActualizar)
+    try {
+        if (objetivoActualizar.valorContribuido) {
+            let valorAcrescentar = objetivoActualizar.valorContribuicoes;
+            let valorFinal = valorAcrescentar + objetivoActualizar.valorContribuido;
+            let objetivoActualizado = { ...objetivoActualizar, valorContribuido: valorFinal};
+            await updateObjectiveById(objetivoActualizado);
+            res.status(200).json(objetivoActualizado)
+        } else {
+            let valorAcrescentar = objetivoActualizar.valorContribuicoes;
+            let objetivoActualizado = {...objetivoActualizar, valorContribuido: valorAcrescentar};
+            await updateObjectiveById(objetivoActualizado);
+            res.status(200).json(objetivoActualizado)
+        }
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 
@@ -64,7 +81,7 @@ objetivosRouter.post("/wizard", async (req, res) => {
 objetivosRouter.post("/", async (req, res) => {
     try {
         const idDoObjetivo = await createObjective(req.body)
-        
+
         res.status(201).json({
             Objetivo: req.body.obj,
             Prazo: req.body.prazo,
@@ -88,5 +105,5 @@ objetivosRouter.delete("/:id", async (req, res) => {
         console.log(err)
     }
 })
- 
+
 export default objetivosRouter

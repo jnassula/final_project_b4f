@@ -10,7 +10,6 @@ import Compras from './pages/Compras';
 import ObjetivoTargetWizard from './components/ObjectivoTargetWizard'
 import Primeira from './pages/Primeira';
 import styles from '../src/styles/App.module.css';
-import Primeira from './pages/Primeira'
 
 
 function App() {
