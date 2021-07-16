@@ -73,23 +73,23 @@ function Login(){
                     <h1> Olá Jonata,</h1>
                     <div className={styles.card}>
                         <p className={styles.saldo}>
-                        {
+                            {
                                 `${displaySaldo.value}€`
                             }
                             <div className={styles.iconCard}><BiIcons.BiEuro/></div></p>
                         <p className={styles.ultimo}>
-                        {
+                            {
                                 `${displayUltimo.value}€`
                             }
                             <div className={styles.iconCard}><BiIcons.BiSelectMultiple/></div></p>
                         <p className={styles.meta}>
-                        {
+                            {
                                 `${displayMeta.value}€`
                             }
                             <div className={styles.iconCard}><BiIcons.BiTrophy/></div></p>
                         <p className={styles.poupanca}>
-                        {
-                                `${displayPoupanca.value}€`
+                            {
+                                `${displayPoupanca.value}%`
                             }
                             <div className={styles.iconCard}><BiIcons.BiLineChart/></div></p>
                     
