@@ -10,8 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
+    "date": "^1.0.2",
     "date-fns": "^2.22.1",
     "express": "^4.17.1",
+    "fns": "^1.0.0",
     "mongodb": "^3.6.10",
     "nodemon": "^2.0.9"
   },

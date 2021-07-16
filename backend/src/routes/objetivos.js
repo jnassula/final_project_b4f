@@ -52,5 +52,5 @@ objetivosRouter.delete("/:id", async (req, res) => {
         console.log(err)
     }
 })
-
+ 
 export default objetivosRouter

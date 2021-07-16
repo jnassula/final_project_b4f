@@ -1,17 +1,15 @@
 .voltar {
     display: flex;
     justify-content: flex-start;
-    background: #8CC4CE;
+    background: #b799d6;
     padding: 15px;
 }
 
-.voltar button {
+.voltar button { 
     background: none;
     border: none;
     border-radius: 8px;
-}
+    font-size: 24px;
+    color: #ffffff
 
-
-.voltar img {
-    width: 32px;
 }

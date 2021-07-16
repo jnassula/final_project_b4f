@@ -10,7 +10,7 @@ const listaItemRouter = express.Router()
 
 listaItemRouter.get("/:id", async (req, res) => {
     try{
-        const items = await displayItem(req.params.id)
+        const items = await displayItem(req.params.id) 
         res.status(200).json(items)
     } catch(err){
         console.log(err)

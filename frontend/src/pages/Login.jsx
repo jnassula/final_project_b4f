@@ -1,5 +1,7 @@
 import { useHistory, useLocation } from "react-router-dom";
 import styles from "../styles/Login.module.css";
+import * as BiIcons from "react-icons/bi";
+import * as FiIcons from "react-icons/fi";
 
 
 function Login(){
@@ -8,9 +10,10 @@ function Login(){
     const history = useHistory();
 
     function mudarCaminho(string){
-        const {pathname} = location
-        const newPath = pathname.concat(string)
-        return newPath
+        const {pathname} = location;
+        console.log(pathname)
+        const newPath = pathname.replace(pathname, string)
+       return `/${newPath}` 
     }
 
     function irObjetivos(){
@@ -31,25 +34,26 @@ function Login(){
         <>
             <div className={styles.telaInicial}>
                 <div className={styles.logo}>
-                    <img src="../docs/imagens/logo_transparent.png" /> 
+                <img src="../docs/imagens/big_logo_ss.png" />
                 </div>
                 <div className={styles.content}>
                     <h1> Olá Jonata,</h1>
                     <div className={styles.card}>
-                        <p className={styles.saldo}>saldo</p>
-                        <p className={styles.ultimo}>ultimo</p>
-                        <p className={styles.meta}>meta</p>
-                        <p className={styles.poupança}>poupança</p>
+                        <p className={styles.saldo}>3000,57€<div className={styles.iconCard}><BiIcons.BiEuro/></div></p>
+                        <p className={styles.ultimo}>+20,45€<div className={styles.iconCard}><BiIcons.BiSelectMultiple/></div></p>
+                        <p className={styles.meta}>1000,00€<div className={styles.iconCard}><BiIcons.BiTrophy/></div></p>
+                        <p className={styles.poupanca}>278,90€<div className={styles.iconCard}><BiIcons.BiLineChart/></div></p>
                     </div>
                     <div className={styles.buttons}>
                         <button onClick={irCarteira}> 
-                            <img src="../docs/imagens/wallet.png" alt="icon carteira" />
-                        </button> <br/>
+                            {/* <div className={styles.iconButtons}><BiIcons.BiWallet /></div> */}
+                            <BiIcons.BiWallet size="30px" />
+                        </button><br/>
                         <button onClick={irObjetivos}>
-                            <img src="../docs/imagens/goal.png" alt="icon objetivos" />
+                            <FiIcons.FiTarget size="30px" />
                             </button> <br/>
                         <button onClick={irCompras}>
-                            <img src="../docs/imagens/clipboard.png" alt="icon compras" />
+                            <BiIcons.BiListCheck size="30px"/>
                         </button>
                     </div>
                 </div>

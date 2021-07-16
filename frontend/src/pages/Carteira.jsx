@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/Carteira.module.css';
+import * as BiIcons from "react-icons/bi";
 // Testee
 
 
@@ -21,7 +22,8 @@ function Carteira() {
         <div className="Carteira">
             <div className={styles.saldo}>
                 <p>
-                    Saldo total
+                    Saldo Atual <br/>
+                    458,96€  
                 </p>
                 <div className={styles.add}>
                    <button 
@@ -33,9 +35,11 @@ function Carteira() {
                         fetchSaldo()
                     }
                     }}>
-                        <img src="../docs/imagens/money.png" alt="icon money" />
+                        {/* <img src="../docs/imagens/money.png" alt="icon money" /> */}
+                        <BiIcons.BiPlus/>
                         Adicionar
                     </button> 
+                    <button>Remover <BiIcons.BiMinus/></button>
                 </div>
                 
             </div>
