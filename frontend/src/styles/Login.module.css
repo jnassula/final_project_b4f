@@ -71,7 +71,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+}  
 
 
 .buttons {
@@ -116,8 +116,6 @@
     margin-bottom: 30px;
 }
 
-
-
 @media only screen and (max-width:600px) {
     .telaInicial {
         background: #f2ecf3;
@@ -153,7 +151,6 @@
     .card p{
         width: calc(50% - 20px);
         height: 100px;
-        /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
         transition: 0.3s;
         border-radius: 15px;
         color: #fff;
@@ -173,16 +170,9 @@
         padding: 20px;
         border-radius: 15px;
         width: 90px;
-        /* background: #00000000;
-        color: #000000;
-        font-weight: bold;
-         */
+       
     }
-/* 
-    .buttons img{
-        max-width: 27px;
-    }
-     */
+
     .logo img {
         width: 40vw;
         margin: 0 auto;
