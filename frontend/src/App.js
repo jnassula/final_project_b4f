@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from "react-router-dom";
 import Objetivo from './pages/Objetivos';
 import Lista from './pages/Lista';
@@ -8,6 +8,7 @@ import Carteira from './pages/Carteira';
 import InicioButton from './components/Inicio';
 import Compras from './pages/Compras';
 import ObjetivoTargetWizard from './components/ObjectivoTargetWizard'
+import Primeira from './pages/Primeira';
 import styles from '../src/styles/App.module.css';
 import Primeira from './pages/Primeira'
 
