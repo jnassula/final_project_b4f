@@ -26,9 +26,20 @@ function Objetivo() {
   async function fetchObjetivo() {
     const res = await fetch("/objetivos")
     const resBody = await res.json();
+    console.log(resBody)
     updateObjetivos(resBody.Objetivos)
   }
 
+
+  async function contribuirObjetivo(id){
+    const res = await fetch(`objetivos/${id}`, {
+      method: "PATCH"
+    })
+    if (res.status === 200) {
+      console.log("Actualização objetivo");
+      fetchObjetivo();
+    }
+  }
 
 
 
@@ -37,8 +48,8 @@ function Objetivo() {
       method: "DELETE"
     })
     if (res.status === 200) {
-      console.log(`Objectivo eliminado com sucesso`)
-      fetchObjetivo()
+      console.log(`Objectivo eliminado com sucesso`);
+      fetchObjetivo();
     }
   }
 
@@ -54,20 +65,17 @@ function Objetivo() {
       {
         listaDeObjetivos?.map(lista => (
           <li key={lista._id}>
-            {` O seu objetivo é: ${lista.objetivo}`} <br />
             <p> O seu objetivo é {lista.objetivo} </p>
-            {` A data limite é: ${lista.prazo}`} <br />
-            {` O valor a atingir é: ${lista.valorAtingir}`} <br />
-            <p>  </p>
+            <p> A data limite é {lista.prazo} </p>
+            <p> O valor a atingir é {lista.valorAtingir} </p>
             <p> Está a {lista.qtdContribuicoes === 1 ? 1 + " contribuição" : `${lista.qtdContribuicoes} contribuições`} de atingir o seu objetivo! </p>
-            {` O valor a atingir é: ${lista.valorAtingir}`} <br />
 
             <button
               onClick={() => deleteObjetivo(lista._id)}
             >
               Apagar
             </button>
-            <button type="submit">Contribuir</button>
+            <button onClick={() => contribuirObjetivo()} type="submit">Contribuir</button>
           </li>
         ))
       }
