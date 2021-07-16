@@ -42,12 +42,12 @@ function Compras() {
     if (listaDeCompras.length !== 0) {
         return (
             <div className={styles.comprasMain}>
-                <div className={styles.compras}>
+                <div className={styles.comprasHeader}>
                     <h3>Tem estas compras planeadas</h3>
                     {
                         listaDeCompras?.map(lista => (
-                            <div className={styles.comprasLista}>
-                                <li key={lista._id}>
+                            <div key={lista._id} className={styles.comprasLista}>
+                                <li >
                                 <Link to={`/lista/${lista._id}`}>
                                     {`${lista.nameLista}   `}
                                 </Link>
@@ -62,22 +62,18 @@ function Compras() {
                                         }
                                     }}>
                                     <img src="../docs/imagens/cancel.png" alt="icon cancel" />
-                                </button>
-                            </li>
+                                    </button>
+                                </li>    
                             </div>
+                                    
+                                
                         ))
-                    } 
-                </div>
-                
-                
-                {
-
-                    < FormularioLista/>
-
-                   
-
-                }
-            </div>
+                    }
+                    </div> 
+                    {
+                        <FormularioLista />
+                    }
+            </div>   
 
         )
         // Se ainda não existir nada na nossa listaDeCompras, retornamos uma página só com o forumlário para criar uma lista

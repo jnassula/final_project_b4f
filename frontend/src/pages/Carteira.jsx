@@ -7,12 +7,12 @@ import * as BiIcons from "react-icons/bi";
 
 function Carteira() {
     
-    const [saldoEmCarteira, setSaldoemCarteira] = useState([]);
+    const [saldoEmCarteira, setSaldoemCarteira] = useState({value: 0});
 
     async function fetchSaldo() {
         const res = await fetch("/saldo")
         const resBody = await res.json();
-        setSaldoemCarteira(resBody.saldos)
+        setSaldoemCarteira(resBody.carteira)
     };
 
     useEffect(() => { fetchSaldo() }, [])
@@ -21,10 +21,12 @@ function Carteira() {
     return (
         <div className="Carteira">
             <div className={styles.saldo}>
-                <p>
-                    Saldo Atual <br/>
-                    458,96€  
-                </p>
+            <p>Saldo total</p>
+                <div className={styles.valor}>
+                {
+                  `${saldoEmCarteira.value}€`
+                }
+                </div>
                 <div className={styles.add}>
                    <button 
                 onClick={async () =>{
@@ -37,27 +39,32 @@ function Carteira() {
                     }}>
                         {/* <img src="../docs/imagens/money.png" alt="icon money" /> */}
                         <BiIcons.BiPlus/>
-                        Adicionar
+                        Adicionar</button>
+               
+
+                <div className={styles.add}>
+                   <button 
+                        onClick={async () =>{
+                            const res = await fetch(`/saldo`, {
+                               method: 'POST'
+                            })
+                            if (res.status === 200) {
+                                fetchSaldo()
+                            }
+                        }}
+                    >
+                        <img src="../docs/imagens/euro.png" alt="icon url"/>
+                            Adicionar
                     </button> 
                     <button>Remover <BiIcons.BiMinus/></button>
                 </div>
                 
             </div>
             
-            {
-                saldoEmCarteira?.map(saldo => (
-                    <li key={saldo._id}>
-                        <Link to={`/saldo/${saldo._id}`}>
-                            {`${saldo.Valor}`}
-                        </Link>
-                        
-                    </li>
-
-                ))
-            }
-            
         </div>
-    )
+        </div>
+
+        )
 }
 
 

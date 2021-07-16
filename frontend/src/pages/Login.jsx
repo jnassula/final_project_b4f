@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useHistory, useLocation } from "react-router-dom";
 import styles from "../styles/Login.module.css";
 import * as BiIcons from "react-icons/bi";
@@ -5,6 +6,11 @@ import * as FiIcons from "react-icons/fi";
 
 
 function Login(){
+
+    const [displaySaldo, setDisplaySaldo] = useState({value: 0})
+    const [displayMeta, setDisplayMeta] = useState({value: 0})
+    const [displayUltimo, setDisplayUltimo] = useState({value: 0})
+    const [displayPoupanca, setDisplayPoupanca] = useState({value: 0})
 
     const location = useLocation();
     const history = useHistory();
@@ -28,7 +34,34 @@ function Login(){
         history.push(mudarCaminho("saldo"))
     }
 
+    async function fetchSaldo() {
+        const res = await fetch("/saldo")
+        const resBody = await res.json();
+        setDisplaySaldo(resBody.carteira)
+    }
 
+    async function fetchMeta() {
+        const res = await fetch("/objetivo")
+        const resBody = await res.json();
+        setDisplayMeta(resBody.objetivo)
+    }
+
+    async function fetchUltimo() {
+        const res = await fetch("/saldo")
+        const resBody = await res.json();
+        setDisplayUltimo(resBody.carteira)
+    }
+
+    async function fetchPoupanca() {
+        const res = await fetch("/objetivo")
+        const resBody = await res.json();
+        setDisplayPoupanca(resBody.objetivo)
+    }
+
+    useEffect(() => fetchSaldo(), [])
+    useEffect(() => fetchMeta(), [])
+    useEffect(() => fetchUltimo(), [])
+    useEffect(() => fetchPoupanca(), [])
 
     return (
         <>
@@ -39,10 +72,27 @@ function Login(){
                 <div className={styles.content}>
                     <h1> Olá Jonata,</h1>
                     <div className={styles.card}>
-                        <p className={styles.saldo}>3000,57€<div className={styles.iconCard}><BiIcons.BiEuro/></div></p>
-                        <p className={styles.ultimo}>+20,45€<div className={styles.iconCard}><BiIcons.BiSelectMultiple/></div></p>
-                        <p className={styles.meta}>1000,00€<div className={styles.iconCard}><BiIcons.BiTrophy/></div></p>
-                        <p className={styles.poupanca}>278,90€<div className={styles.iconCard}><BiIcons.BiLineChart/></div></p>
+                        <p className={styles.saldo}>
+                        {
+                                `${displaySaldo.value}€`
+                            }
+                            <div className={styles.iconCard}><BiIcons.BiEuro/></div></p>
+                        <p className={styles.ultimo}>
+                        {
+                                `${displayUltimo.value}€`
+                            }
+                            <div className={styles.iconCard}><BiIcons.BiSelectMultiple/></div></p>
+                        <p className={styles.meta}>
+                        {
+                                `${displayMeta.value}€`
+                            }
+                            <div className={styles.iconCard}><BiIcons.BiTrophy/></div></p>
+                        <p className={styles.poupanca}>
+                        {
+                                `${displayPoupanca.value}€`
+                            }
+                            <div className={styles.iconCard}><BiIcons.BiLineChart/></div></p>
+                    
                     </div>
                     <div className={styles.buttons}>
                         <button onClick={irCarteira}> 

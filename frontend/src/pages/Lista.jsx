@@ -45,9 +45,9 @@ function Lista() {
 
   if (listaDeItens.length > 0) {
     return (
-      <div className="App">
+      <div className={styles.listaHeader}>
         <h1>{nomePagina}</h1>
-        <div>
+        <div className={styles.listaDescricao}>
           {
             listaDeItens?.map((objeto, i) => (
               <li key={i}>
@@ -59,12 +59,15 @@ function Lista() {
             ))
           }
         </div>
-        <FormularioItem addItem={addItem} />
+        
 
 
-        <div>
+        <div className={styles.shoppingCart}>
+          <FormularioItem addItem={addItem} />
           <p>
-            <button onClick={enviarMensagem} type="alert" >Vou às compras</button>
+            <button className={styles.shoppingCartButton} onClick={enviarMensagem} type="alert" >
+              <img src="../docs/imagens/shopping-cart.png" alt="icon shopping-cart" />
+            </button>
           </p>
         </div>
       </div>
