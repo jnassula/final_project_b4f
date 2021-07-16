@@ -1,8 +1,7 @@
-import { ShowValue, insertValue } from '../data/carteira';
+import { showValue, insertValue } from '../data/carteira';
 
-export async function displayWallet() {
-    return await showValue({}, {projection: {value: 1}}
-        );
+export async function displayWallet(id) {
+    return await showValue()
 }
 
 export async function createWallet(saldoCarteira) {

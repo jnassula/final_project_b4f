@@ -26,12 +26,15 @@ function FormularioLista() {
 
                 {
                     ({ handleSubmit }) => (
-                        <form onSubmit={handleSubmit}>
-                            <Field name="nameLista" required />
-                            <button type="submit">
-                                <img src="../docs/imagens/add.png" alt="icon add" />
-                            </button>
-                        </form>
+                        <div className={styles.input}>
+                            <form onSubmit={handleSubmit}>
+                                <Field name="nameLista" required />
+                                <button type="submit">
+                                    <img src="../docs/imagens/add.png" alt="icon add" />
+                                </button>
+                            </form>
+                        </div>
+                        
                     )
                 }
             </Formik>
