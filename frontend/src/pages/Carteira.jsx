@@ -39,7 +39,6 @@ function Carteira() {
                     }}>
                         <BiIcons.BiPlus/>
                         Adicionar</button>
-                    <button>Remover <BiIcons.BiMinus/></button>
                 </div>
                 
             </div> 
