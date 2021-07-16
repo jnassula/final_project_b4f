@@ -24,13 +24,6 @@ function Carteira() {
                 <div className={styles.valor}>
                 {
                   `${saldoEmCarteira.value}€`
-                    // saldoEmCarteira?.map(saldo => (
-                    // <li key={saldo._id}>
-                    //     <Link to={`/saldo/${saldo._id}`}>
-                    //         {`${saldo.Valor}`}
-                    //     </Link>
-                    // </li>
-                // ))
                 }
                 </div>
 
