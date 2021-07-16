@@ -13,18 +13,29 @@ carteiraRouter.get('/', async (req, res) => {
     }
 })
 
-
 carteiraRouter.post('/', async (req, res) => {
-    try {
-        const idCarteira = await createWallet(req.body.saldo)
-        res.status(200).json({
-            saldo: req.body.saldo,
-            id: idCarteira
+    try{
+        await createWallet()
+        res.status(201).json({
+            saldo: 0
         })
-    } catch (err) {
+    } catch(err){
         console.log(err)
     }
 })
+
+
+// carteiraRouter.post('/', async (req, res) => {
+//     try {
+//         const idCarteira = await createWallet(req.body.saldo)
+//         res.status(200).json({
+//             saldo: req.body.saldo,
+//             id: idCarteira
+//         })
+//     } catch (err) {
+//         console.log(err)
+//     }
+// })
 
 
 export default carteiraRouter;

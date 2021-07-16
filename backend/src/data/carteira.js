@@ -27,10 +27,10 @@ async function updateValueById(carteira) {
 }
 
 
-export async function insertValue(value) {
+export async function insertWallet() {
 
     const collection = await getCollection("smartSavings", "Carteira");
-    const res = await collection.insertOne({ value: value })
+    const res = await collection.insertOne({ saldo: 0 })
 
     // const carteira = await showValueById(id);
     // carteira.saldo.push(values);
