@@ -37,32 +37,14 @@ function Carteira() {
                         fetchSaldo()
                     }
                     }}>
-                        {/* <img src="../docs/imagens/money.png" alt="icon money" /> */}
                         <BiIcons.BiPlus/>
                         Adicionar</button>
-               
-
-                <div className={styles.add}>
-                   <button 
-                        onClick={async () =>{
-                            const res = await fetch(`/saldo`, {
-                               method: 'POST'
-                            })
-                            if (res.status === 200) {
-                                fetchSaldo()
-                            }
-                        }}
-                    >
-                        <img src="../docs/imagens/euro.png" alt="icon url"/>
-                            Adicionar
-                    </button> 
-                    <button>Remover <BiIcons.BiMinus/></button>
                 </div>
                 
-            </div>
+            </div> 
             
         </div>
-        </div>
+        
 
         )
 }
