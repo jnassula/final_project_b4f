@@ -26,7 +26,6 @@ function Objetivo() {
   async function fetchObjetivo() {
     const res = await fetch("/objetivos")
     const resBody = await res.json();
-    console.log(resBody)
     updateObjetivos(resBody.Objetivos)
   }
 
@@ -36,9 +35,8 @@ function Objetivo() {
       method: "PATCH"
     })
     if (res.status === 200) {
-      console.log("Actualização objetivo");
       fetchObjetivo();
-    }
+    } else console.log("Falhou")
   }
 
 
@@ -56,6 +54,7 @@ function Objetivo() {
 
   return (
     <div className="Objetivo">
+      {/* <button onClick={() => console.log(listaDeObjetivos)}> consolelog </button> */}
       <button
         onClick={() => wizardObjetivo()}
       > Criar Objetivo
@@ -75,7 +74,7 @@ function Objetivo() {
             >
               Apagar
             </button>
-            <button onClick={() => contribuirObjetivo()} type="submit">Contribuir</button>
+            <button onClick={() => contribuirObjetivo(lista._id)} type="submit">Contribuir {lista.valorContribuicoes} €</button>
           </li>
         ))
       }
