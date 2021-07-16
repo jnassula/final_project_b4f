@@ -1,5 +1,6 @@
 import { useHistory, useLocation } from "react-router-dom";
 import styles from "../styles/Inicio.module.css";
+import * as BiIcons from "react-icons/bi";
 
 function InicioButton(){
     const location = useLocation()
@@ -8,7 +9,7 @@ function InicioButton(){
     function voltarInicio(){
         const {pathname} = location
         const lastSlashIndex = pathname.lastIndexOf("/");
-        const newPath = pathname.slice(0, lastSlashIndex === 0? 1 : lastSlashIndex)
+        const newPath = pathname.slice(0, lastSlashIndex === 0 ? 1 : lastSlashIndex)
         history.push(newPath)
     }
 
@@ -17,7 +18,7 @@ function InicioButton(){
     return (
         <div className={styles.voltar}>
             <button onClick={voltarInicio}>
-                <img src="../docs/imagens/back-arrow.png" alt="voltar" />
+               <div className={styles.iconVoltar}><BiIcons.BiUndo/></div>
             </button>
         </div>
     )

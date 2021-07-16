@@ -1,12 +1,13 @@
 .saldo {
-    background: #303B9F;
+    background: #b799d6;
     color: #fff;
-    font-size: 18px;
-    display: flex;
+    font-size: 30px;
+    text-align: top left;
     display: flex;
     flex-direction: column;
     padding-top: 20%;
     height: 30vh;
+    border-radius: 0 0 30px 30px;
     
 }
 .saldo p {

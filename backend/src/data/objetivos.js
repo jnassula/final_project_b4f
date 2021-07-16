@@ -11,7 +11,7 @@ export async function insertObjective(objObjetivo){
 
 export async function findObjective(query, options){
     const collection = await getCollection("smartSavings", "Objetivos");
-    const objetivos = await collection.find(query, options).toArray();
+    const objetivos = await collection.find(query, options).toArray(); 
     return objetivos
 }
 

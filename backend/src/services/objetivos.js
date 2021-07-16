@@ -18,7 +18,7 @@ export async function createObjective(objObjetivo) {
     return await insertObjective(objObjetivo);
 }
 
-
+ 
 export async function eraseObjetive(id) {
     return await deleteObjectiveById(id);
 }

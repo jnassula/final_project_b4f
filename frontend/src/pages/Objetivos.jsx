@@ -76,7 +76,7 @@ function Objetivo() {
             }
           }).then(res => res.json()
             .then(json => resetForm()))
-        }}
+        }} 
       >
 
         {
