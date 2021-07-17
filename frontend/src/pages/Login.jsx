@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useHistory, useLocation } from "react-router-dom";
+import LoadingScreen from "../components/LoadingScreen";
 import styles from "../styles/Login.module.css";
 import * as BiIcons from "react-icons/bi";
 import * as FiIcons from "react-icons/fi";
+
 
 
 function Login() {
@@ -113,9 +115,8 @@ function Login() {
                                 <div className={styles.iconCard}><BiIcons.BiLineChart /></div></p>
 
                         </div>
-                        <div className={styles.buttons}>
+                        <div className={styles.buttons}>    
                             <button onClick={irCarteira}>
-                                {/* <div className={styles.iconButtons}><BiIcons.BiWallet /></div> */}
                                 <BiIcons.BiWallet size="30px" />
                             </button><br />
                             <button onClick={irObjetivos}>
@@ -129,7 +130,7 @@ function Login() {
                 </div>
             </>
         )
-    } else return <h1>Por favor aguarde</h1>
+    } else return <LoadingScreen />
 }
 
 export default Login
