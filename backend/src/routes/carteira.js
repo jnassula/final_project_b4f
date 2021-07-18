@@ -9,7 +9,7 @@ carteiraRouter.get('/', async (req, res) => {
             carteira: await displayWallet()
         })
     } catch (err) {
-        console.log(err)
+        res.status(404)
     }
 })
 
