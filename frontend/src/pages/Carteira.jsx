@@ -19,7 +19,7 @@ function Carteira() {
     async function adicionarSaldo(valor) {
         const res = await fetch("/saldo/adicionar", {
             method: "PATCH",
-            body: JSON.stringify(valor),
+            body: JSON.stringify({valor}),
             headers: { "Content-type": "application/json" }
         })
         if (res.status === 200) {
@@ -40,17 +40,15 @@ function Carteira() {
                     }
                 </div>
                 <div className={styles.add}>
+                    <input type="number" placeholder="€"></input>
                     <button
-                        onClick={(valorAdicionar) => adicionarSaldo(valorAdicionar)}>
-                        {/* <img src="../docs/imagens/money.png" alt="icon money" /> */}
+                        onClick={ (valorAdicionar) => adicionarSaldo(valorAdicionar) }>
                         <BiIcons.BiPlus />
-                        Adicionar</button>
-
+                            Adicionar
+                    </button>
                 </div>
-
             </div>
         </div>
-
     )
 }
 
