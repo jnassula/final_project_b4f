@@ -12,7 +12,9 @@ function tratarDatas(prazoEmString) {
     const semanasRestantes = differenceInWeeks(prazoObjetivo, agora)
     const diasRestantes = differenceInCalendarDays(prazoObjetivo, agora)
 
-    return ({ mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes })
+    if (prazoObjetivo < agora ){
+        return null
+    } else return ({ mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes })
 }
 
 function arredondarValor(valor, tempo){
@@ -21,12 +23,11 @@ function arredondarValor(valor, tempo){
 
 // Se existir valorDiario, vai retornar o valor a contribuir diariamente, e a mesma coisa para o valorSemanal e o valorMensal
 function escolhasUtilizador(tempoRestante, valor) {
-    // A REVER
     const valorDiario = arredondarValor(valor, tempoRestante.diasRestantes)
     const valorSemanal = arredondarValor(valor, tempoRestante.semanasRestantes)
     const valorMensal = arredondarValor(valor, tempoRestante.mesesRestantes)
 
-    if (tempoRestante.mesesRestantes === 0 && tempoRestante.semanasRestantes === 0) {
+    if (tempoRestante.mesesRestantes === 0 && tempoRestante.semanasRestantes === 0 && tempoRestante.diasRestantes > 0) {
         return { valorDiario: valorDiario, dias: tempoRestante.diasRestantes }
     } else if (tempoRestante.mesesRestantes === 0) {
         return { valorSemanal: valorSemanal, semanas: tempoRestante.semanasRestantes, valorDiario: valorDiario, dias: tempoRestante.diasRestantes }
@@ -86,8 +87,11 @@ objetivosRouter.patch("/:id", async (req, res) => {
 objetivosRouter.post("/wizard", async (req, res) => {
     try {
         const dataObjetivo = new Date(req.body.data)
+        // A REVER MENSAGEM DE ERRO
         const objTempo = tratarDatas(dataObjetivo)
-        res.status(200).json(escolhasUtilizador(objTempo, req.body.valor))
+        if (objTempo === null){
+            res.status(404)
+        } else res.status(200).json(escolhasUtilizador(objTempo, req.body.valor))
     } catch (err) {
         console.log(err)
     }
