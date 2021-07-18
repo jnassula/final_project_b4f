@@ -7,7 +7,7 @@
 // Wizard de configuração de objectivos []
 // Contribuir para os mesmos e actualizar []
 
-import { insertObjective, findObjective, deleteObjectiveById, findObjetiveById, updateOneById } from "../data/objetivos";
+import { insertObjective, findObjective, deleteObjectiveById, findObjetiveById, updateOneById, updateOneByIdFinal } from "../data/objetivos";
 
 export async function displayObjective() {
     return await findObjective({}, { projection: { nameLista: 0 } }
@@ -30,4 +30,10 @@ export async function eraseObjetive(id) {
 export async function updateObjectiveById(objetivoActualizado){
     return await updateOneById(objetivoActualizado)
 }
+
+
+export async function updateObjectiveByIdFinal(objetivoActualizado){
+    return await updateOneByIdFinal(objetivoActualizado)
+}
+
 

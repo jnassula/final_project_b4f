@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 
 function Objetivo() {
   const [listaDeObjetivos, updateObjetivos] = useState([])
+  const [concluido, updateConcluido] = useState(false)
   const params = useParams();
   const history = useHistory();
 
@@ -30,13 +31,16 @@ function Objetivo() {
   }
 
 
-  async function contribuirObjetivo(id){
+  async function contribuirObjetivo(id) {
     const res = await fetch(`objetivos/${id}`, {
       method: "PATCH"
     })
     if (res.status === 200) {
       fetchObjetivo();
-    } else console.log("Falhou")
+    } else if (res.status === 202) {
+      updateConcluido(true)
+      fetchObjetivo();
+    } else console.log("Falhou a actualização do objectivo")
   }
 
 
@@ -52,40 +56,50 @@ function Objetivo() {
   }
 
 
-  return (
-    <div className="Objetivo">
-      {/* <button onClick={() => console.log(listaDeObjetivos)}> consolelog </button> */}
-      <button
-        onClick={() => wizardObjetivo()}
-      > Criar Objetivo
-      </button>
+  if (!concluido) {
 
-      <h1>Objetivos</h1>
-      {
-        listaDeObjetivos?.map(lista => (
-          <li key={lista._id}>
-            <p> O seu objetivo é {lista.objetivo} </p>
-            <p> A data limite é {lista.prazo} </p>
-            <p> O valor a atingir é {lista.valorAtingir} </p>
-            <p> Está a {lista.qtdContribuicoes === 1 ? 1 + " contribuição" : `${lista.qtdContribuicoes} contribuições`} de atingir o seu objetivo! </p>
+    return (
+      <div className="Objetivo">
+        {/* <button onClick={() => console.log(listaDeObjetivos)}> consolelog </button> */}
+        <button
+          onClick={() => wizardObjetivo()}
+        > Criar Objetivo
+        </button>
 
-            <button
-              onClick={() => deleteObjetivo(lista._id)}
-            >
-              Apagar
-            </button>
-            <button onClick={() => contribuirObjetivo(lista._id)} type="submit">Contribuir {lista.valorContribuicoes} €</button>
-          </li>
-        ))
-      }
-      <br />
-      <div>
-        <p>
-          <button type="submit">Contribuir</button>
-        </p>
+        <h1>Objetivos</h1>
+        {
+          listaDeObjetivos?.map(lista => (
+            <li key={lista._id}>
+              <p> O seu objetivo é {lista.objetivo} </p>
+              <p> A data limite é {lista.prazo} </p>
+              <p> O valor a atingir é {lista.valorAtingir} </p>
+              <p> Está a {lista.qtdContribuicoes === 1 ? 1 + " contribuição" : `${lista.qtdContribuicoes} contribuições`} de atingir o seu objetivo! </p>
+
+              <button
+                onClick={() => deleteObjetivo(lista._id)}
+              >
+                Apagar
+              </button>
+              <button onClick={() => contribuirObjetivo(lista._id)} type="submit">Contribuir {lista.valorContribuicoes} €</button>
+            </li>
+          ))
+        }
+        <br />
+        <div>
+          <p>
+            <button type="submit">Contribuir</button>
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    setTimeout(() => {
+      updateConcluido(false)
+    }, 2200);
+    return (
+      <h1> Parabéns! Concluiu o seu objetivo! </h1>
+    )
+  }
 }
 
 export default Objetivo;

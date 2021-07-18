@@ -1,5 +1,5 @@
 import express from "express"
-import { createObjective, displayObjective, displayObjectiveById, eraseObjetive, updateObjectiveById } from "../services/objetivos"
+import { createObjective, displayObjective, displayObjectiveById, eraseObjetive, updateObjectiveById, updateObjectiveByIdFinal } from "../services/objetivos"
 import { differenceInCalendarDays, differenceInWeeks, differenceInMonths, parseISO } from 'date-fns'
 const objetivosRouter = express.Router()
 
@@ -15,12 +15,16 @@ function tratarDatas(prazoEmString) {
     return ({ mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes })
 }
 
+function arredondarValor(valor, tempo){
+    return (Math.floor((valor / tempo * 100)) / 100)
+}
+
 // Se existir valorDiario, vai retornar o valor a contribuir diariamente, e a mesma coisa para o valorSemanal e o valorMensal
 function escolhasUtilizador(tempoRestante, valor) {
     // A REVER
-    const valorDiario = Math.floor(valor / tempoRestante.diasRestantes)
-    const valorSemanal = Math.floor(valor / tempoRestante.semanasRestantes)
-    const valorMensal = Math.floor(valor / tempoRestante.mesesRestantes)
+    const valorDiario = arredondarValor(valor, tempoRestante.diasRestantes)
+    const valorSemanal = arredondarValor(valor, tempoRestante.semanasRestantes)
+    const valorMensal = arredondarValor(valor, tempoRestante.mesesRestantes)
 
     if (tempoRestante.mesesRestantes === 0 && tempoRestante.semanasRestantes === 0) {
         return { valorDiario: valorDiario, dias: tempoRestante.diasRestantes }
@@ -29,6 +33,12 @@ function escolhasUtilizador(tempoRestante, valor) {
     } else return { valorMensal: valorMensal, meses: tempoRestante.mesesRestantes, valorSemanal: valorSemanal, semanas: tempoRestante.semanasRestantes, valorDiario: valorDiario, dias: tempoRestante.diasRestantes }
 }
 
+function actualizarObjetivo(objetivoActualizar) {
+    let valorAcrescentar = objetivoActualizar.valorContribuicoes;
+    let valorFinal = valorAcrescentar + objetivoActualizar.valorContribuido;
+    let contribuicoesActualizadas = objetivoActualizar.qtdContribuicoes - 1
+    return { ...objetivoActualizar, valorContribuido: valorFinal, qtdContribuicoes: contribuicoesActualizadas };
+}
 
 // GET /objetivos - Retorna todas os objetivos
 objetivosRouter.get("/", async (req, res) => {
@@ -42,21 +52,22 @@ objetivosRouter.get("/", async (req, res) => {
 })
 
 
+
 // PATCH /objetivos - Vai encontrar o objetivo por id e actualizar o valorContribuido se já existir ou então criá-lo
 objetivosRouter.patch("/:id", async (req, res) => {
     const objetivoActualizar = await displayObjectiveById(req.params.id)
-    console.log(objetivoActualizar)
     try {
-        if (objetivoActualizar.valorContribuido && objetivoActualizar.qtdContribuicoes !== 0) {
-            let valorAcrescentar = objetivoActualizar.valorContribuicoes;
-            let valorFinal = valorAcrescentar + objetivoActualizar.valorContribuido;
-            let contribuicoesActualizadas = objetivoActualizar.qtdContribuicoes - 1
-            let objetivoActualizado = { ...objetivoActualizar, valorContribuido: valorFinal, qtdContribuicoes: contribuicoesActualizadas };
+        if (objetivoActualizar.valorContribuido && objetivoActualizar.qtdContribuicoes > 2) {
+            let objetivoActualizado = actualizarObjetivo(objetivoActualizar)
             await updateObjectiveById(objetivoActualizado);
             res.status(200).json(objetivoActualizado)
-        } else if (objetivoActualizar.qtdContribuicoes === 1){
-            console.log("Chegou ao seu objetivo")
-            // TO DO: APAGAR O OBJETIVO E MENSAGEM DE PARABÉNS AO UTILIZADOR!
+        } else if (objetivoActualizar.qtdContribuicoes === 2) {
+            let objetivoActualizado = actualizarObjetivo(objetivoActualizar)
+            await updateObjectiveByIdFinal(objetivoActualizado);
+            res.status(200).json(objetivoActualizado)
+        } else if (objetivoActualizar.qtdContribuicoes === 1) {
+            await eraseObjetive(req.params.id)
+            res.status(202).json()
         } else {
             let valorAcrescentar = objetivoActualizar.valorContribuicoes;
             let contribuicoesActualizadas = objetivoActualizar.qtdContribuicoes - 1
