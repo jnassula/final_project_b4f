@@ -41,8 +41,9 @@ export async function insertWallet() {
 export async function showValue() {
     const collection = await getCollection("smartSavings", "Carteira");
     const carteira = await collection.findOne({})
-
-    return carteira;
+    if (carteira) {
+        return carteira;
+    } else return carteira
 }
 
 // export async function deleteWalletById(id) {

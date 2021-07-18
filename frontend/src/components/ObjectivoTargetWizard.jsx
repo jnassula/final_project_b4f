@@ -2,11 +2,7 @@ import { useEffect, useState } from "react"
 import { useHistory } from 'react-router';
 
 
-//     // Vamos enviar o obj dadosFinais com o GET e a resposta que temos são os cálculos
-//     // {valorDiário: X
-//      valorSemanal: y
-//      valorMensal: z
-//      }
+
 //      O utilizador escolhe e essa escolha é enviada ao backend (POST) com a opção escolhida. 
 //      Nós gravamos o objetivo, com: 
 //      {descricao, frequencia, valorDaFrequencia, valorTotal, valorContribuido(começa a zero)}

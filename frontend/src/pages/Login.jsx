@@ -39,9 +39,15 @@ function Login() {
 
     async function fetchSaldo() {
         const res = await fetch("/saldo")
-        const resBody = await res.json();
-        console.log(resBody)
-        setDisplaySaldo(resBody.carteira.saldo)
+        if (res.status === 404){
+            criarCarteira()
+        } else {
+            const resBody = await res.json();
+            console.log(resBody)
+            setDisplaySaldo(resBody.carteira.saldo)
+            setReady(true)
+
+        }
     }
 
     async function criarCarteira() {
@@ -78,7 +84,7 @@ function Login() {
     }
 
 
-    useEffect(() => criarCarteira(), [])
+    useEffect(() => fetchSaldo(), [])
     // useEffect(() => fetchMeta(), [])
     // useEffect(() => fetchPoupanca(), [])
 
