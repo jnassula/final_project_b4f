@@ -46,6 +46,7 @@ function Compras() {
             <div className={styles.comprasMain}>
                 <div className={styles.comprasHeader}>
                     <h3>Tem estas compras planeadas</h3>
+                    </div> 
                     {
                         listaDeCompras?.map(lista => (
                             <div key={lista._id} className={styles.comprasLista}>
@@ -72,7 +73,6 @@ function Compras() {
                                 
                         ))
                     }
-                    </div> 
                     {
                         <FormularioLista />
                     }

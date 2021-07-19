@@ -16,9 +16,10 @@
 }
 
 
-.input {
+.input { 
     width: 100%;
     padding: 10%;
+    font-size: 24px;
 }
 
 .input form {
@@ -31,6 +32,7 @@
     border-radius: 25px;
     border: 2px solid #b799d6;
     flex: 1;
+    font-size: 15px;
 
 }
 

@@ -89,7 +89,7 @@ function Objetivo() {
                 </div>
               
               </li>
-            </div>
+            </div> 
             
           ))
         }

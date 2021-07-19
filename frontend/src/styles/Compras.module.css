@@ -22,26 +22,26 @@
 
 .comprasHeader h3 {
     font-size: 30px;
+    margin-bottom: 10px;
 }
 
 
-
-/* .compras a {
-    font-size: 20px;
-    color: #000;
-
-} */
-
 .comprasLista {
-    display: flex;
     flex-direction: column;
     /* padding: 10%; */
     /* width: 100%; */
-    
-
-   
+    background: rgba(255, 255, 255, 0.39);
+    width: 80%;
+    margin: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: flex;
+    padding: 10px;
+    align-items: center;
     
 }
+
+
 
 .comprasLista a {
     text-decoration: none;
@@ -51,7 +51,7 @@
 
 .comprasLista li {
     list-style-type: none;
-   
+    
 }
 
 .comprasLista button {
@@ -81,7 +81,7 @@
 
 .iconRemove{
     font-size: 20px;
-    margin-left: 10px;
+    padding-left: 20px;
 
  
 }

@@ -65,7 +65,7 @@ h1 {
     padding: 8px;
     width: 140px;
     display: flex;
-    align-items: center;
+    align-items: center;  
     justify-content: center;
 }
 
