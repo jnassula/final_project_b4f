@@ -1,0 +1,35 @@
+.wizardForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.wizardMain h1 {
+    margin-left: 10px;
+}
+
+
+.wizardForm button {
+    width: 80%;
+    background: #b799d6;
+    color: #fff;
+    font-weight: bold;
+    border: 2px solid #b799d6;
+    border-radius: 25px;
+    margin-top: 15px;
+    margin-left: 35px;
+    padding: 8px;
+    text-align: center;
+}
+
+.wizardForm input {
+    width: 80%;
+    margin-top: 50px;
+    margin-left: 35px;
+    padding: 8px;
+    border: 2px solid #b799d6;
+    border-radius: 25px;
+    text-align: center  ;
+
+}
