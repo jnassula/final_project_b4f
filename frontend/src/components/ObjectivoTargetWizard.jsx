@@ -78,7 +78,7 @@ function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, set
     function voltarObjetivo(){
         history.push("objetivo")
     }
-
+//
     function tratarObjetivo() {
         if (opcaoFinal === "diario") {
             return {
