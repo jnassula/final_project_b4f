@@ -1,10 +1,11 @@
 .listaHeader {
-    background: #303B9F;
-    color: #fff;
+    background: #b799d6;
+    color: #000;
     font-size: 18px;
     padding-left: 10%;
     padding-top: 20%;
     height: 30vh;
+    border-radius: 0 0 30px 30px;
 }
 
 .listaDescricao {
@@ -12,6 +13,12 @@
     flex-direction: column;
     padding: 10%;
     width: 100%;
+    
+}
+
+.listaDescricao li{
+    list-style-type: none;
+
 }
 
 .shoppingCart img {

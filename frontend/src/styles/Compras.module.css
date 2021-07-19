@@ -5,12 +5,13 @@
 }
 
 .comprasHeader {
-    background: #303B9F;
+    background: #b799d6;
     color: #fff;
     font-size: 18px;
     padding-left: 10%;
-    padding-top: 20%;
-    height: 30vh;
+    padding-top: 10%;
+    height: 20vh;
+    border-radius: 0 0 30px 30px;
 }
 
 .compras {
@@ -20,24 +21,37 @@
 }
 
 .comprasHeader h3 {
-    font-size: 34px;
+    font-size: 30px;
 }
 
-.compras li {
-    list-style-type: none;
-}
 
-.compras a {
+
+/* .compras a {
     font-size: 20px;
     color: #000;
-    text-decoration: none;
-}
+
+} */
 
 .comprasLista {
     display: flex;
     flex-direction: column;
-    padding: 10%;
-    width: 100%;
+    /* padding: 10%; */
+    /* width: 100%; */
+    
+
+   
+    
+}
+
+.comprasLista a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #000;
+}
+
+.comprasLista li {
+    list-style-type: none;
+   
 }
 
 .comprasLista button {
@@ -46,9 +60,6 @@
     background: none;
 }
 
-.comprasLista img {
-    max-width: 24px;
-}
 
 .listas {
     display: flex;
@@ -58,14 +69,6 @@
     padding: 10px
 }
 
-.comprasLista :nth-child(2n) {
-    background: #FCFFF7;
-    
-}
-.comprasLista :nth-child(2n + 1) {
-    background: rgba(192, 191, 191, 0.205);
-   
-}
 
 .listas :nth-child(2n) {
     background: #FCFFF7;
@@ -76,3 +79,9 @@
    
 }
 
+.iconRemove{
+    font-size: 20px;
+    margin-left: 10px;
+
+ 
+}

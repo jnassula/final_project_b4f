@@ -7,7 +7,7 @@ import * as FiIcons from "react-icons/fi";
 
 
 
-function Login() {
+function Login({username}) {
     const [ready, setReady] = useState(false)
 
     const [displaySaldo, setDisplaySaldo] = useState({ value: 0 })
@@ -85,9 +85,7 @@ function Login() {
     //     const resBody = await res.json();
     //     setDisplayPoupanca(resBody.objetivo)
     // }
-    function consoleLog() {
-        return console.log(displayUltimo)
-    }
+   
 
 
     useEffect(() => fetchSaldo(), [])
@@ -98,16 +96,16 @@ function Login() {
         return (
             <>
                 <div className={styles.telaInicial}>
-                    <button onClick={() => consoleLog()}> Consolelog </button>
+                    
                     <div className={styles.logo}>
                         <img src="../docs/imagens/big_logo_ss.png" />
                     </div>
                     <div className={styles.content}>
-                        <h1> Olá Jonata,</h1>
+                        <h1> Olá {username},</h1>
                         <div className={styles.card}>
                             <p className={styles.saldo}>
                                 {
-                                   ` Saldo:${displaySaldo}€`
+                                   `${displaySaldo}€`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiEuro /></div></p>
                             <p className={styles.ultimo}>
@@ -117,7 +115,7 @@ function Login() {
                                 <div className={styles.iconCard}><BiIcons.BiSelectMultiple /></div></p>
                             <p className={styles.meta}>
                                 {
-                                    `Meta: ${displayMeta}€`
+                                    `${displayMeta}€`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiTrophy /></div></p>
                             <p className={styles.poupanca}>

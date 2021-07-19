@@ -1,6 +1,8 @@
 import { Field, Formik } from "formik"
 import { useHistory } from "react-router";
 import styles from "../styles/FormularioLista.module.css";
+import * as BiIcons from "react-icons/bi";
+
 
 function FormularioLista() {
     const history = useHistory()
@@ -30,7 +32,7 @@ function FormularioLista() {
                             <form onSubmit={handleSubmit}>
                                 <Field name="nameLista" required />
                                 <button type="submit">
-                                    <img src="../docs/imagens/add.png" alt="icon add" />
+                                    <div className={styles.iconAdd}><BiIcons.BiListPlus /></div>
                                 </button>
                             </form>
                         </div>

@@ -20,7 +20,7 @@ function App() {
       <InicioButton />
       <Switch>
         <Route exact path="/">
-          <Login />
+          <Login username={loggedIn} />
         </Route>
         <Route exact path="/lista">
           <Compras />
