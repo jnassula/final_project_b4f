@@ -52,6 +52,25 @@ objetivosRouter.get("/", async (req, res) => {
     }
 })
 
+function calcularSomaObjetivos(objetivos){
+    let soma = 0
+    for (const objetivo of objetivos){
+        soma = soma + parseInt(objetivo.valorAtingir) 
+    }
+    return soma
+}
+
+objetivosRouter.get("/total", async (req, res) => {
+    try {
+        const objetivos = await displayObjective()
+            res.status(200).json({
+                valorTotal: calcularSomaObjetivos(objetivos)
+            })
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 
 
 // PATCH /objetivos - Vai encontrar o objetivo por id e actualizar o valorContribuido se já existir ou então criá-lo

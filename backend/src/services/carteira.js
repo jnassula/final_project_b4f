@@ -8,6 +8,6 @@ export async function createWallet() {
     return await insertWallet();
 }
 
-export async function updateWallet() {
-    return await updateValueById()
+export async function updateWallet(addedValue, id) {
+    return await updateValueById(addedValue, id)
 }

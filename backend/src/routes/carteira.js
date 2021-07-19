@@ -5,7 +5,7 @@ const carteiraRouter = express.Router()
 
 carteiraRouter.get('/', async (req, res) => {
     const valor = await displayWallet() ;
-        if (valor!== null) {
+        if (valor !== null) {
             res.status(200).json({
                 carteira: valor
             })
@@ -26,31 +26,16 @@ carteiraRouter.post('/', async (req, res) => {
     }
 })
 
-carteiraRouter.patch('/adicionar/:id', async (req, res) => {
+carteiraRouter.patch('/:id', async (req, res) => {
     try {
-        const saldo = req.body
-        const id = await updateWallet(req.params.id, saldo)
-        
-        res.status(200).json({
-            id: id
-        }) 
+        console.log(req.body.valor)
+        console.log(req.body.id)
+        await updateWallet(req.body.valor, req.body.id)
+        res.status(200).json("A funcionar")
     } catch(err) {
         console.log(err)
     }
 })
-
-
-// carteiraRouter.post('/', async (req, res) => {
-//     try {
-//         const idCarteira = await createWallet(req.body.saldo)
-//         res.status(200).json({
-//             saldo: req.body.saldo,
-//             id: idCarteira
-//         })
-//     } catch (err) {
-//         console.log(err)
-//     }
-// })
 
 
 export default carteiraRouter;
