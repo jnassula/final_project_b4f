@@ -7,7 +7,7 @@ import * as FiIcons from "react-icons/fi";
 
 
 
-function Login() {
+function Login({username}) {
     const [ready, setReady] = useState(false)
 
     const [displaySaldo, setDisplaySaldo] = useState({ value: 0 })
@@ -98,7 +98,7 @@ function Login() {
                         <img src="../docs/imagens/big_logo_ss.png" />
                     </div>
                     <div className={styles.content}>
-                        <h1> Olá Jonata,</h1>
+                        <h1> Olá {username},</h1>
                         <div className={styles.card}>
                             <p className={styles.saldo}>
                                 {
