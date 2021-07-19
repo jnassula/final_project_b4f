@@ -4,22 +4,24 @@ import { displayWallet, createWallet, updateWallet } from '../services/carteira'
 const carteiraRouter = express.Router()
 
 carteiraRouter.get('/', async (req, res) => {
-    try {
-        res.status(200).json({
-            carteira: await displayWallet()
-        })
-    } catch (err) {
-        console.log(err)
+    const valor = await displayWallet() ;
+        if (valor!== null) {
+            res.status(200).json({
+                carteira: valor
+            })
+        } else{
+            res.status(404).json("Não tem carteira")
+        }
     }
-})
+)
 
 carteiraRouter.post('/', async (req, res) => {
-    try{
+    try {
         await createWallet()
         res.status(201).json({
             saldo: 0
         })
-    } catch(err){
+    } catch (err) {
         console.log(err)
     }
 })

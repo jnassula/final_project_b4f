@@ -47,15 +47,20 @@ objetivosRouter.patch("/:id", async (req, res) => {
     const objetivoActualizar = await displayObjectiveById(req.params.id)
     console.log(objetivoActualizar)
     try {
-        if (objetivoActualizar.valorContribuido) {
+        if (objetivoActualizar.valorContribuido && objetivoActualizar.qtdContribuicoes !== 0) {
             let valorAcrescentar = objetivoActualizar.valorContribuicoes;
             let valorFinal = valorAcrescentar + objetivoActualizar.valorContribuido;
-            let objetivoActualizado = { ...objetivoActualizar, valorContribuido: valorFinal};
+            let contribuicoesActualizadas = objetivoActualizar.qtdContribuicoes - 1
+            let objetivoActualizado = { ...objetivoActualizar, valorContribuido: valorFinal, qtdContribuicoes: contribuicoesActualizadas };
             await updateObjectiveById(objetivoActualizado);
             res.status(200).json(objetivoActualizado)
+        } else if (objetivoActualizar.qtdContribuicoes === 1){
+            console.log("Chegou ao seu objetivo")
+            // TO DO: APAGAR O OBJETIVO E MENSAGEM DE PARABÉNS AO UTILIZADOR!
         } else {
             let valorAcrescentar = objetivoActualizar.valorContribuicoes;
-            let objetivoActualizado = {...objetivoActualizar, valorContribuido: valorAcrescentar};
+            let contribuicoesActualizadas = objetivoActualizar.qtdContribuicoes - 1
+            let objetivoActualizado = { ...objetivoActualizar, valorContribuido: valorAcrescentar, qtdContribuicoes: contribuicoesActualizadas };
             await updateObjectiveById(objetivoActualizado);
             res.status(200).json(objetivoActualizado)
         }

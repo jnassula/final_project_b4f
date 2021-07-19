@@ -40,7 +40,8 @@ export async function updateOneById(objetivoAtualizado){
         {_id: ObjectId(objetivoAtualizado._id)},
         {
             $set: {
-                valorContribuido: objetivoAtualizado.valorContribuido
+                valorContribuido: objetivoAtualizado.valorContribuido,
+                qtdContribuicoes: objetivoAtualizado.qtdContribuicoes
             }
         })
     return res.result.ok === 1
