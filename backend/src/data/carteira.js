@@ -21,9 +21,11 @@ export async function showValueById(id) {
     return carteira;
 }
 
-async function updateValueById(carteira) {
+export async function updateValueById(carteira, value) {
     const collection = await getCollection("smartSavings", "Carteira");
-    const res = await collection.updateOne({ _id: carteira })
+    const res = await collection.updateOne( { _id: ObjectId(carteira) }, { $set: { saldo: value } })
+
+    return res
 }
 
 
