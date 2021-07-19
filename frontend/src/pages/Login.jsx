@@ -70,6 +70,7 @@ function Login() {
         const resBody = await res.json();
         console.log(resBody)
         setDisplayMeta(resBody.valorTotal)
+        setDisplayPoupanca(resBody.percentagemPoupada)
     }
 
     async function fetchUltimo() {
@@ -120,7 +121,7 @@ function Login() {
                                 <div className={styles.iconCard}><BiIcons.BiTrophy /></div></p>
                             <p className={styles.poupanca}>
                                 {
-                                    `${displayPoupanca.value}€`
+                                    `${displayPoupanca}%`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiLineChart /></div></p>
 
