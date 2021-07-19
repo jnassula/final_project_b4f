@@ -41,7 +41,23 @@ export async function updateOneById(objetivoAtualizado){
         {
             $set: {
                 valorContribuido: objetivoAtualizado.valorContribuido,
-                qtdContribuicoes: objetivoAtualizado.qtdContribuicoes
+                qtdContribuicoes: objetivoAtualizado.qtdContribuicoes,
+               
+            }
+        })
+    return res.result.ok === 1
+}
+
+export async function updateOneByIdFinal(objetivoAtualizado){
+    const collection = await getCollection ("smartSavings", "Objetivos");
+    console.log(objetivoAtualizado)
+    const res = await collection.updateOne(
+        {_id: ObjectId(objetivoAtualizado._id)},
+        {
+            $set: {
+                valorContribuido: objetivoAtualizado.valorContribuido,
+                qtdContribuicoes: objetivoAtualizado.qtdContribuicoes,
+                valorContribuicoes: (Math.floor(((objetivoAtualizado.valorAtingir - objetivoAtualizado.valorContribuido) * 100))) / 100  
             }
         })
     return res.result.ok === 1

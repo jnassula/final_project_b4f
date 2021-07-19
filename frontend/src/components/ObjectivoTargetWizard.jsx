@@ -78,7 +78,7 @@ function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, set
     function voltarObjetivo(){
         history.push("objetivo")
     }
-
+//
     function tratarObjetivo() {
         if (opcaoFinal === "diario") {
             return {
@@ -140,7 +140,7 @@ function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, set
             console.log(json)
             voltarObjetivo();
         } catch (err) {
-            console.log(err)
+            console.log("Por favor introduza uma data válida")
         }
     }
 
