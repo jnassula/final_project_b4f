@@ -14,6 +14,7 @@ function Login() {
     const [displayMeta, setDisplayMeta] = useState({ value: 0 })
     const [displayUltimo, setDisplayUltimo] = useState({ value: 0 })
     const [displayPoupanca, setDisplayPoupanca] = useState({ value: 0 })
+    const [id, setId] = useState("")
 
     const location = useLocation();
     const history = useHistory();
@@ -42,6 +43,7 @@ function Login() {
         const resBody = await res.json();
         console.log(resBody)
         setDisplaySaldo(resBody.carteira.saldo)
+        setId(resBody.carteira._id)
     }
 
     async function criarCarteira() {
@@ -134,3 +136,7 @@ function Login() {
 }
 
 export default Login
+
+//TODO 
+//passar para o component Carteria.jsx props do id e saldo
+//receber props com classe 

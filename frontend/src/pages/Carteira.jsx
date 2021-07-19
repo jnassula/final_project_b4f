@@ -8,6 +8,7 @@ import * as BiIcons from "react-icons/bi";
 function Carteira() {
 
     const [saldoEmCarteira, setSaldoemCarteira] = useState(0);
+    const [adicionarValor, setAdicionar] = useState(0)
 
     async function fetchSaldo() {
         const res = await fetch("/saldo")
@@ -16,10 +17,10 @@ function Carteira() {
         setSaldoemCarteira(resBody.carteira.saldo)
     };
 
-    async function adicionarSaldo(valor) {
+    async function adicionarSaldo(carteira, valor) {
         const res = await fetch("/saldo/adicionar", {
             method: "PATCH",
-            body: JSON.stringify({valor}),
+            body: JSON.stringify({carteira, valor}),
             headers: { "Content-type": "application/json" }
         })
         if (res.status === 200) {
@@ -39,14 +40,20 @@ function Carteira() {
                         `${saldoEmCarteira}€`
                     }
                 </div>
-                <div className={styles.add}>
-                    <input type="number" placeholder="€"></input>
-                    <button
-                        onClick={ (valorAdicionar) => adicionarSaldo(valorAdicionar) }>
-                        <BiIcons.BiPlus />
-                            Adicionar
-                    </button>
-                </div>
+                <form onSubmit={ (adicionarValor) => adicionarSaldo(adicionarValor) }>
+                    <div className={styles.add}>
+                        <input 
+                            type="number" 
+                            name="valor" 
+                            placeholder="0,00€" 
+                            onChange={event => setAdicionar(event.target.value)}></input>
+                        <button type="submit">
+                            <BiIcons.BiPlus />
+                                Adicionar
+                        </button>
+                    </div>
+                </form>
+                
             </div>
         </div>
     )

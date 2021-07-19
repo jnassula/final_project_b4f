@@ -1,5 +1,5 @@
 import express from 'express';
-import { displayWallet, createWallet } from '../services/carteira';
+import { displayWallet, createWallet, updateWallet } from '../services/carteira';
 
 const carteiraRouter = express.Router()
 
@@ -20,6 +20,19 @@ carteiraRouter.post('/', async (req, res) => {
             saldo: 0
         })
     } catch(err){
+        console.log(err)
+    }
+})
+
+carteiraRouter.patch('/adicionar/:id', async (req, res) => {
+    try {
+        const saldo = req.body
+        const id = await updateWallet(req.params.id, saldo)
+        
+        res.status(200).json({
+            id: id
+        }) 
+    } catch(err) {
         console.log(err)
     }
 })

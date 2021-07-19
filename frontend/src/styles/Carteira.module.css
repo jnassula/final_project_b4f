@@ -38,6 +38,12 @@
     max-width: 20%;
     border-radius: 8px;
     text-align: center;
+    font-size: 18px;
+    
+}
+
+.add input::placeholder {
+    color: rgb(182, 176, 176);
 }
 
 .add input:focus {
