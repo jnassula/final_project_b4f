@@ -1,11 +1,12 @@
 import express from "express"
 import { createObjective, displayObjective, displayObjectiveById, eraseObjetive, updateObjectiveById, updateObjectiveByIdFinal } from "../services/objetivos"
-import { differenceInCalendarDays, differenceInWeeks, differenceInMonths, parseISO } from 'date-fns'
+import {spendWallet} from "../services/carteira"
+import { differenceInCalendarDays, differenceInWeeks, differenceInMonths } from 'date-fns'
 const objetivosRouter = express.Router()
 
 // Esta função recebe o prazo do Objetivo (já como data):
 // Calcula a diferença em dias meses e dias entre o prazoObjetivo e o momento actual (em que a função acontece)
-function tratarDatas(prazoEmString) {
+function tratarDatas(prazoEmString){
     const agora = new Date()
     const prazoObjetivo = new Date(prazoEmString)
     const mesesRestantes = differenceInMonths(prazoObjetivo, agora)

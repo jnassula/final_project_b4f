@@ -12,7 +12,7 @@ function Login() {
 
     const [displaySaldo, setDisplaySaldo] = useState({ value: 0 })
     const [displayMeta, setDisplayMeta] = useState({ value: 0 })
-    const [displayUltimo, setDisplayUltimo] = useState({ value: 0 })
+    const [displayUltimo, setDisplayUltimo] = useState( null )
     const [displayPoupanca, setDisplayPoupanca] = useState({ value: 0 })
     const [id, setId] = useState("")
 
@@ -76,6 +76,7 @@ function Login() {
     async function fetchUltimo() {
         const res = await fetch("/saldo")
         const resBody = await res.json();
+        console.log(resBody)
         setDisplayUltimo(resBody.carteira)
     }
 
@@ -111,7 +112,7 @@ function Login() {
                                 <div className={styles.iconCard}><BiIcons.BiEuro /></div></p>
                             <p className={styles.ultimo}>
                                 {
-                                    `Último movimento: + ${displayUltimo}€`
+                                    displayUltimo ? `Último movimento: ${displayUltimo}€` : `Último movimento:`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiSelectMultiple /></div></p>
                             <p className={styles.meta}>
@@ -121,7 +122,7 @@ function Login() {
                                 <div className={styles.iconCard}><BiIcons.BiTrophy /></div></p>
                             <p className={styles.poupanca}>
                                 {
-                                    `${displayPoupanca}%`
+                                    displayPoupanca ? `${displayPoupanca}%` : "0%"
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiLineChart /></div></p>
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/Carteira.module.css';
 import * as BiIcons from "react-icons/bi";
-// Testee
+
 
 
 function Carteira() {
