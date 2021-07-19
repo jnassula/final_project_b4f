@@ -46,6 +46,9 @@ function Login() {
             const resBody = await res.json();
             console.log(resBody)
             setDisplaySaldo(resBody.carteira.saldo)
+            if (resBody.carteira.ultimoMovimento){
+                setDisplayUltimo(resBody.carteira.ultimoMovimento)
+            }
             setReady(true)
 
         }
@@ -107,7 +110,7 @@ function Login() {
                                 <div className={styles.iconCard}><BiIcons.BiEuro /></div></p>
                             <p className={styles.ultimo}>
                                 {
-                                    `${displayUltimo.saldo}€`
+                                    `+ ${displayUltimo}€`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiSelectMultiple /></div></p>
                             <p className={styles.meta}>

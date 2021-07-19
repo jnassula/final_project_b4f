@@ -7,28 +7,33 @@ import * as BiIcons from "react-icons/bi";
 
 function Carteira() {
 
-    const [saldoEmCarteira, setSaldoemCarteira] = useState(0);
-    const [adicionarValor, setAdicionar] = useState(0)
+    const [saldoEmCarteira, setSaldoemCarteira] = useState({});
+    const [valorAdicionar, setValorAdicionar] = useState(0)
 
     async function fetchSaldo() {
         const res = await fetch("/saldo")
         const resBody = await res.json();
-        console.log(resBody.carteira.saldo)
-        setSaldoemCarteira(resBody.carteira.saldo)
+        setSaldoemCarteira({saldo: resBody.carteira.saldo, id: resBody.carteira._id})
     };
 
-    async function adicionarSaldo(carteira, valor) {
-        const res = await fetch("/saldo/adicionar", {
+    async function adicionarSaldo(id, valor) {
+        const res = await fetch(`/saldo/${id}`, {
             method: "PATCH",
-            body: JSON.stringify({carteira, valor}),
+            body: JSON.stringify({id, valor}),
             headers: { "Content-type": "application/json" }
-        })
+        }) 
+        console.log(res.status)
         if (res.status === 200) {
-            fetchSaldo();
+            await fetchSaldo();
         } else return "Falha a adicionar valor"
     }
 
     useEffect(() => { fetchSaldo() }, [])
+
+    async function handleSubmit(event){
+        event.preventDefault();
+        await adicionarSaldo(saldoEmCarteira.id, valorAdicionar)
+    }
 
 
     return (
@@ -37,16 +42,17 @@ function Carteira() {
                 <p>Saldo total</p>
                 <div className={styles.valor}>
                     {
-                        `${saldoEmCarteira}€`
+                        `${saldoEmCarteira.saldo}€`
                     }
                 </div>
-                <form onSubmit={ (adicionarValor) => adicionarSaldo(adicionarValor) }>
+                <form onSubmit={ async (event) => await handleSubmit(event) }>
                     <div className={styles.add}>
                         <input 
                             type="number" 
                             name="valor" 
                             placeholder="0,00€" 
-                            onChange={event => setAdicionar(event.target.value)}></input>
+                            value={valorAdicionar}
+                            onChange={event => setValorAdicionar(event.target.value)}></input>
                         <button type="submit">
                             <BiIcons.BiPlus />
                                 Adicionar

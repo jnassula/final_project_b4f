@@ -18,14 +18,20 @@ export async function showValueById(id) {
     const collection = await getCollection("smartSavings", "Carteira");
     const carteira = await collection.findOne({ _id: ObjectId(id) })
 
-    return carteira;
+    return carteira.saldo;
 }
 
-export async function updateValueById(carteira, value) {
+export async function updateValueById(value, id) {
     const collection = await getCollection("smartSavings", "Carteira");
-    const res = await collection.updateOne( { _id: ObjectId(carteira) }, { $set: { saldo: value } })
+    const saldoActualizado = parseInt(await showValueById(id)) + parseInt(value)
+    const res = await collection.updateOne(
+        { _id: ObjectId(id) },
+        {
+            $set:
+                { saldo: saldoActualizado, ultimoMovimento: parseInt(value) }
+        })
 
-    return res
+    return res.result.ok === 1
 }
 
 
