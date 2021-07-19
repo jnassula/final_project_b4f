@@ -186,9 +186,15 @@ function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, set
                 <h1> Escolhe a sua opção: </h1>
                 <div className={styles.wizardForm}>
                     <form onSubmit={(e) => criarObjetivo(e)}>
-                        <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ?<br />
-                        <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} {escolhasUtilizador.semanas > 1 ? "semanas" : "semana"}?
+                        <label>
+                            <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ?
+                            </label>
+                        <br />
+                        <label>
+                            <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} {escolhasUtilizador.semanas > 1 ? "semanas" : "semana"}?
                         <button type="submit">Finalizar</button>
+                        </label>
+                            
                     </form>
                 </div>
                 
