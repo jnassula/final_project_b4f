@@ -111,7 +111,7 @@ function Login({username}) {
                                 <div className={styles.iconCard}><BiIcons.BiEuro /></div></p>
                             <p className={styles.ultimo}>
                                 {
-                                    displayUltimo ? `Último movimento: ${displayUltimo}€` : `Último movimento:`
+                                    displayUltimo ? ` ${displayUltimo}€` : `0€`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiSelectMultiple /></div></p>
                             <p className={styles.meta}>
