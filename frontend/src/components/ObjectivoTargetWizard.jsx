@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useHistory } from 'react-router';
+import LoadingScreen from "./LoadingScreen";
 import styles from '../styles/ObjectivoTargetWizard.module.css'
 
 
@@ -29,14 +30,17 @@ function DefinirObjetivo({ objetivo, setObjetivo, handleSubmit }) {
 
 function DefinirValor({ valor, setValor, handleSubmit }) {
     return (
-        <div>
-            <h1> Defina quanto quer juntar para o seu objetivo</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="number" value={valor} onChange={e => setValor(e.target.value)} />
-                <button type="submit">
-                    Submit
-                </button>
-            </form>
+        <div className={styles.wizardMain}>
+            <h1>Defina quanto quer juntar para o seu objetivo</h1>
+            <div className={styles.wizardForm}>
+                    <form onSubmit={handleSubmit}>
+                    <input type="number" value={valor} onChange={e => setValor(e.target.value)} />
+                    <button type="submit">
+                        Submit
+                    </button>
+                </form>
+            </div>
+            
 
         </div>
     )
@@ -54,17 +58,20 @@ function DefinirData({ data, setData, handleSubmit, setOpcoes, objetivo, valor }
     }
 
     return (
-        <div>
-            <h1> Defina a data do seu objetivo</h1>
-            <form onSubmit={handleSubmit}>
-                <input type="date" value={data} onChange={e => {
-                    setData(e.target.value);
-                    definirOpcoes(e.target.value);
-                }} />
-                <button type="submit">
-                    Submit
-                </button>
-            </form>
+        <div className={styles.wizardMain}>
+            <h1>Defina a data do seu objetivo</h1>
+            <div className={styles.wizardForm}>
+                <form onSubmit={handleSubmit}>
+                    <input type="date" value={data} onChange={e => {
+                        setData(e.target.value);
+                        definirOpcoes(e.target.value);
+                    }} />
+                    <button type="submit">
+                        Submit
+                    </button>
+                </form>
+            </div>
+            
         </div>
     )
 }
@@ -155,43 +162,49 @@ function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, set
     }
 
     if (loading) {
-        return <h1> Por favor aguarde</h1>
+        return <LoadingScreen />
     } else if (escolhasUtilizador && escolhasUtilizador.valorMensal) {
         // console.log(escolhasUtilizador)
         return (
-            <div>
-                <h1> Escolha a sua opção: </h1>
-
-                <form onSubmit={(e) => criarObjetivo(e)}>
-                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ? <br />
-                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} semanas ? <br />
-                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("mensal")} value={escolhasUtilizador.valorMensal} /> Prefere poupar {escolhasUtilizador.valorMensal} euros durante {escolhasUtilizador.meses} {escolhasUtilizador.meses > 1 ? "meses" : "mês"} ?
-                    <button type="submit">Finalizar</button>
-                </form>
-                <button onClick={() => consoleLog()}>consolelog</button>
+            <div className={styles.wizardMain}>
+                <h1> Escolhe a sua opção: </h1>
+                <div className={styles.wizardForm}>
+                    <form onSubmit={(e) => criarObjetivo(e)}>
+                        <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ? <br />
+                        <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} semanas ? <br />
+                        <input type="radio" name="escolha" onClick={() => setOpcaoFinal("mensal")} value={escolhasUtilizador.valorMensal} /> Prefere poupar {escolhasUtilizador.valorMensal} euros durante {escolhasUtilizador.meses} {escolhasUtilizador.meses > 1 ? "meses" : "mês"} ?
+                        <button type="submit">Finalizar</button>
+                    </form>
+                </div>
+                
 
             </div>
         )
     } else if (escolhasUtilizador && escolhasUtilizador.valorSemanal) {
         return (
-            <div>
-                <h1> Escolha a sua opção: </h1>
-                <form onSubmit={(e) => criarObjetivo(e)}>
-                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ?<br />
-                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} {escolhasUtilizador.semanas > 1 ? "semanas" : "semana"}?
-                    <button type="submit">Finalizar</button>
-                </form>
-                <button onClick={() => consoleLog()}>consolelog</button>
+            <div className={styles.wizardMain}>
+                <h1> Escolhe a sua opção: </h1>
+                <div className={styles.wizardForm}>
+                    <form onSubmit={(e) => criarObjetivo(e)}>
+                        <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ?<br />
+                        <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} {escolhasUtilizador.semanas > 1 ? "semanas" : "semana"}?
+                        <button type="submit">Finalizar</button>
+                    </form>
+                </div>
+                
             </div>
         )
     } else return (
-        <div>
+        <div className={styles.wizardMain}>
             <h1> A melhor maneira de poupar para o seu objetivo é: </h1>
-            <form onSubmit={(e) => criarObjetivo(e)}>
-                <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} {escolhasUtilizador.dias > 1 ? "dias" : "dia"}.
-                <button type="submit">Finalizar</button>
-            </form>
-            <button onClick={() => consoleLog()}>consolelog</button>
+            <div className={styles.wizardForm}>
+                <form onSubmit={(e) => criarObjetivo(e)}>
+                    <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} {escolhasUtilizador.dias > 1 ? "dias" : "dia"}.
+                    <button type="submit">Finalizar</button>
+                </form>
+            </div>
+            
+            
         </div>
     )
 }
