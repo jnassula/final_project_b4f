@@ -21,7 +21,7 @@ function Login() {
 
     function mudarCaminho(string) {
         const { pathname } = location;
-        console.log(pathname)
+        // console.log(pathname)
         const newPath = pathname.replace(pathname, string)
         return `/${newPath}`
     }
@@ -44,7 +44,7 @@ function Login() {
             criarCarteira()
         } else {
             const resBody = await res.json();
-            console.log(resBody)
+            // console.log(resBody)
             setDisplaySaldo(resBody.carteira.saldo)
             if (resBody.carteira.ultimoMovimento){
                 setDisplayUltimo(resBody.carteira.ultimoMovimento)
@@ -65,12 +65,12 @@ function Login() {
         } else return "Não tem carteira"
     }
 
-    // async function fetchMeta() {
-    //     const res = await fetch("/objetivo")
-    //     const resBody = await res.json();
-    //     console.log(resBody)
-    //     setDisplayMeta(resBody.objetivo)
-    // }
+    async function fetchMeta() {
+        const res = await fetch("/objetivos/total")
+        const resBody = await res.json();
+        console.log(resBody)
+        setDisplayMeta(resBody.valorTotal)
+    }
 
     async function fetchUltimo() {
         const res = await fetch("/saldo")
@@ -89,7 +89,7 @@ function Login() {
 
 
     useEffect(() => fetchSaldo(), [])
-    // useEffect(() => fetchMeta(), [])
+    useEffect(() => fetchMeta(), [])
     // useEffect(() => fetchPoupanca(), [])
 
     if (ready) {
@@ -105,17 +105,17 @@ function Login() {
                         <div className={styles.card}>
                             <p className={styles.saldo}>
                                 {
-                                    `${displaySaldo}€`
+                                   ` Saldo:${displaySaldo}€`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiEuro /></div></p>
                             <p className={styles.ultimo}>
                                 {
-                                    `+ ${displayUltimo}€`
+                                    `Último movimento: + ${displayUltimo}€`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiSelectMultiple /></div></p>
                             <p className={styles.meta}>
                                 {
-                                    `${displayMeta.value}€`
+                                    `Meta: ${displayMeta}€`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiTrophy /></div></p>
                             <p className={styles.poupanca}>
@@ -145,6 +145,3 @@ function Login() {
 
 export default Login
 
-//TODO 
-//passar para o component Carteria.jsx props do id e saldo
-//receber props com classe 
