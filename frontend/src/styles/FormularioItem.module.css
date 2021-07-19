@@ -4,3 +4,27 @@
     padding: 10%;
     width: 100%;
 }
+
+.itemMain input {
+    width: 80%;
+    margin-top: 5px;
+    margin-left: 35px;
+    padding: 8px;
+    border: 2px solid #b799d6;
+    border-radius: 25px;
+    text-align: center  ;
+
+}
+
+.itemMain button {
+    width: 80%;
+    background: #b799d6;
+    color: #fff;
+    font-weight: bold;
+    border: 2px solid #b799d6;
+    border-radius: 25px;
+    margin-top: 15px;
+    margin-left: 35px;
+    padding: 8px;
+    text-align: center;
+}

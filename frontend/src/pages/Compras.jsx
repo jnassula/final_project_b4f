@@ -63,7 +63,9 @@ function Compras() {
                                             fetchListas()
                                         }
                                     }}>
-                                    <div className={styles.iconRemove}><BiIcons.BiTrash /></div>
+                                    <div className={styles.iconRemove}>
+                                        <BiIcons.BiTrash />
+                                        </div>
                                     </button>
                                    
                                 </li>    

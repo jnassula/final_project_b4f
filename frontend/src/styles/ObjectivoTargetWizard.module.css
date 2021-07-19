@@ -33,3 +33,7 @@
     text-align: center  ;
 
 }
+
+.wizardForm form {
+    margin-left: 20px;
+}
