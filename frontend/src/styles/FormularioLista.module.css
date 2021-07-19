@@ -44,3 +44,8 @@
 .iconAdd{
     font-size: 34px;
 }
+
+.iconAdd :hover{
+    box-shadow: 3px 3px 0  rgba(0,0,0,0.2);
+    transform: scale(1.0);
+}

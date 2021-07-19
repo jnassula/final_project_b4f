@@ -5,12 +5,13 @@
 }
 
 .comprasHeader {
-    /* background: #16bac5; */
-    color: #000;
+    background: #b799d6;
+    color: #fff;
     font-size: 18px;
     padding-left: 10%;
-    padding-top: 20%;
-    height: 30vh;
+    padding-top: 10%;
+    height: 20vh;
+    border-radius: 0 0 30px 30px;
 }
 
 .compras {
@@ -34,8 +35,10 @@
 .comprasLista {
     display: flex;
     flex-direction: column;
-    padding: 10%;
-    width: 100%;
+    /* padding: 10%; */
+    /* width: 100%; */
+    
+
    
     
 }
@@ -77,6 +80,8 @@
 }
 
 .iconRemove{
-    font-size: 24px;
+    font-size: 20px;
+    margin-left: 10px;
+
  
 }
