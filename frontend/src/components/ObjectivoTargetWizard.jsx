@@ -12,7 +12,7 @@ function DefinirObjetivo({ objetivo, setObjetivo, handleSubmit }) {
 
     return (
         <div className={styles.wizardMain}>
-            <h1> Define o teu objetivo</h1>
+            <h1> Defina o seu objetivo</h1>
             <div className={styles.wizardForm}>
               <form onSubmit={handleSubmit}>
                 <input required value={objetivo} onChange={e => setObjetivo(e.target.value)} />
@@ -30,7 +30,7 @@ function DefinirObjetivo({ objetivo, setObjetivo, handleSubmit }) {
 function DefinirValor({ valor, setValor, handleSubmit }) {
     return (
         <div>
-            <h1> Define quanto queres juntar para o teu objetivo</h1>
+            <h1> Defina quanto quer juntar para o seu objetivo</h1>
             <form onSubmit={handleSubmit}>
                 <input type="number" value={valor} onChange={e => setValor(e.target.value)} />
                 <button type="submit">
@@ -55,7 +55,7 @@ function DefinirData({ data, setData, handleSubmit, setOpcoes, objetivo, valor }
 
     return (
         <div>
-            <h1> Define a data do teu objetivo</h1>
+            <h1> Defina a data do seu objetivo</h1>
             <form onSubmit={handleSubmit}>
                 <input type="date" value={data} onChange={e => {
                     setData(e.target.value);
@@ -160,7 +160,7 @@ function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, set
         // console.log(escolhasUtilizador)
         return (
             <div>
-                <h1> Escolhe a tua opção: </h1>
+                <h1> Escolha a sua opção: </h1>
 
                 <form onSubmit={(e) => criarObjetivo(e)}>
                     <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ? <br />
@@ -175,7 +175,7 @@ function EscolhaOpçoes({ valor, data, objetivo, opcoes, escolhasUtilizador, set
     } else if (escolhasUtilizador && escolhasUtilizador.valorSemanal) {
         return (
             <div>
-                <h1> Escolhe a tua opção: </h1>
+                <h1> Escolha a sua opção: </h1>
                 <form onSubmit={(e) => criarObjetivo(e)}>
                     <input type="radio" name="escolha" onClick={() => setOpcaoFinal("diario")} value={escolhasUtilizador.valorDiario} /> Prefere poupar {escolhasUtilizador.valorDiario} euros durante {escolhasUtilizador.dias} dias ?<br />
                     <input type="radio" name="escolha" onClick={() => setOpcaoFinal("semanal")} value={escolhasUtilizador.valorSemanal} /> Prefere poupar {escolhasUtilizador.valorSemanal} euros durante {escolhasUtilizador.semanas} {escolhasUtilizador.semanas > 1 ? "semanas" : "semana"}?
