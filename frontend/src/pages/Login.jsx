@@ -22,6 +22,7 @@ function Login({username}) {
     function mudarCaminho(string) {
         const { pathname } = location;
         // console.log(pathname)
+        
         const newPath = pathname.replace(pathname, string)
         return `/${newPath}`
     }
