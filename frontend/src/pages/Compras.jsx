@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import FormularioLista from "../components/FormularioLista";
 import styles from "../styles/Compras.module.css"
+import * as BiIcons from "react-icons/bi";
+
 
 function Compras() {
     // Definimos o nosso state com uma Lista de Compras que começa vazia
@@ -61,8 +63,9 @@ function Compras() {
                                             fetchListas()
                                         }
                                     }}>
-                                    <img src="../docs/imagens/cancel.png" alt="icon cancel" />
+                                    <div className={styles.iconRemove}><BiIcons.BiTrash /></div>
                                     </button>
+                                   
                                 </li>    
                             </div>
                                     
