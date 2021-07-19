@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useHistory } from 'react-router';
+import styles from '../styles/ObjectivoTargetWizard.module.css'
 
 
 
@@ -10,15 +11,17 @@ import { useHistory } from 'react-router';
 function DefinirObjetivo({ objetivo, setObjetivo, handleSubmit }) {
 
     return (
-        <div>
-            <button onClick={() => console.log(objetivo)}> Console log </button>
+        <div className={styles.wizardMain}>
             <h1> Define o teu objetivo</h1>
-            <form onSubmit={handleSubmit}>
+            <div className={styles.wizardForm}>
+              <form onSubmit={handleSubmit}>
                 <input required value={objetivo} onChange={e => setObjetivo(e.target.value)} />
-                <button type="submit">
+                <button className={styles.btnObj} type="submit">
                     Submit
                 </button>
-            </form>
+             </form>  
+            </div>
+            
         </div>
     )
 }
@@ -27,7 +30,6 @@ function DefinirObjetivo({ objetivo, setObjetivo, handleSubmit }) {
 function DefinirValor({ valor, setValor, handleSubmit }) {
     return (
         <div>
-            <button onClick={() => console.log(valor)}> Console log </button>
             <h1> Define quanto queres juntar para o teu objetivo</h1>
             <form onSubmit={handleSubmit}>
                 <input type="number" value={valor} onChange={e => setValor(e.target.value)} />
@@ -53,7 +55,6 @@ function DefinirData({ data, setData, handleSubmit, setOpcoes, objetivo, valor }
 
     return (
         <div>
-            <button onClick={() => console.log(data)}> Console log </button>
             <h1> Define a data do teu objetivo</h1>
             <form onSubmit={handleSubmit}>
                 <input type="date" value={data} onChange={e => {
