@@ -12,7 +12,7 @@ function Login({username}) {
 
     const [displaySaldo, setDisplaySaldo] = useState({ value: 0 })
     const [displayMeta, setDisplayMeta] = useState({ value: 0 })
-    const [displayUltimo, setDisplayUltimo] = useState({ value: 0 })
+    const [displayUltimo, setDisplayUltimo] = useState( null )
     const [displayPoupanca, setDisplayPoupanca] = useState({ value: 0 })
     const [id, setId] = useState("")
 
@@ -22,6 +22,7 @@ function Login({username}) {
     function mudarCaminho(string) {
         const { pathname } = location;
         // console.log(pathname)
+        
         const newPath = pathname.replace(pathname, string)
         return `/${newPath}`
     }
@@ -70,11 +71,13 @@ function Login({username}) {
         const resBody = await res.json();
         console.log(resBody)
         setDisplayMeta(resBody.valorTotal)
+        setDisplayPoupanca(resBody.percentagemPoupada)
     }
 
     async function fetchUltimo() {
         const res = await fetch("/saldo")
         const resBody = await res.json();
+        console.log(resBody)
         setDisplayUltimo(resBody.carteira)
     }
 
@@ -108,7 +111,7 @@ function Login({username}) {
                                 <div className={styles.iconCard}><BiIcons.BiEuro /></div></p>
                             <p className={styles.ultimo}>
                                 {
-                                    `+ ${displayUltimo}€`
+                                    displayUltimo ? `Último movimento: ${displayUltimo}€` : `Último movimento:`
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiSelectMultiple /></div></p>
                             <p className={styles.meta}>
@@ -118,7 +121,7 @@ function Login({username}) {
                                 <div className={styles.iconCard}><BiIcons.BiTrophy /></div></p>
                             <p className={styles.poupanca}>
                                 {
-                                    `${displayPoupanca.value}%`
+                                    displayPoupanca ? `${displayPoupanca}%` : "0%"
                                 }
                                 <div className={styles.iconCard}><BiIcons.BiLineChart /></div></p>
 

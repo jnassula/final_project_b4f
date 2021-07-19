@@ -1,23 +1,24 @@
 import express from "express"
 import { createObjective, displayObjective, displayObjectiveById, eraseObjetive, updateObjectiveById, updateObjectiveByIdFinal } from "../services/objetivos"
-import { differenceInCalendarDays, differenceInWeeks, differenceInMonths, parseISO } from 'date-fns'
+import {spendWallet} from "../services/carteira"
+import { differenceInCalendarDays, differenceInWeeks, differenceInMonths } from 'date-fns'
 const objetivosRouter = express.Router()
 
 // Esta função recebe o prazo do Objetivo (já como data):
 // Calcula a diferença em dias meses e dias entre o prazoObjetivo e o momento actual (em que a função acontece)
-function tratarDatas(prazoEmString) {
+function tratarDatas(prazoEmString){
     const agora = new Date()
     const prazoObjetivo = new Date(prazoEmString)
     const mesesRestantes = differenceInMonths(prazoObjetivo, agora)
     const semanasRestantes = differenceInWeeks(prazoObjetivo, agora)
     const diasRestantes = differenceInCalendarDays(prazoObjetivo, agora)
 
-    if (prazoObjetivo < agora ){
+    if (prazoObjetivo < agora) {
         return null
     } else return ({ mesesRestantes: mesesRestantes, semanasRestantes: semanasRestantes, diasRestantes: diasRestantes })
 }
 
-function arredondarValor(valor, tempo){
+function arredondarValor(valor, tempo) {
     return (Math.floor((valor / tempo * 100)) / 100)
 }
 
@@ -52,20 +53,35 @@ objetivosRouter.get("/", async (req, res) => {
     }
 })
 
-function calcularSomaObjetivos(objetivos){
+function calcularSomaObjetivos(objetivos) {
     let soma = 0
-    for (const objetivo of objetivos){
-        soma = soma + parseInt(objetivo.valorAtingir) 
+    for (const objetivo of objetivos) {
+        soma = soma + parseInt(objetivo.valorAtingir)
     }
     return soma
+}
+
+function calcularPoupancaObjetivos(objetivos) {
+    let valorContribuido = 0
+    let valorTotal = 0
+    for (const objetivo of objetivos) {
+        if (objetivo.valorContribuido) {
+            valorTotal += parseInt(objetivo.valorAtingir)
+            valorContribuido += objetivo.valorContribuido
+        } else valorTotal += parseInt(objetivo.valorAtingir)
+    }
+    console.log(valorTotal, valorContribuido)
+    return Math.floor(((valorContribuido / valorTotal) * 100) * 100) / 100
 }
 
 objetivosRouter.get("/total", async (req, res) => {
     try {
         const objetivos = await displayObjective()
-            res.status(200).json({
-                valorTotal: calcularSomaObjetivos(objetivos)
-            })
+        console.log(calcularPoupancaObjetivos(objetivos))
+        res.status(200).json({
+            valorTotal: calcularSomaObjetivos(objetivos),
+            percentagemPoupada: calcularPoupancaObjetivos(objetivos)
+        })
     } catch (err) {
         console.log(err)
     }
@@ -108,7 +124,7 @@ objetivosRouter.post("/wizard", async (req, res) => {
         const dataObjetivo = new Date(req.body.data)
         // A REVER MENSAGEM DE ERRO
         const objTempo = tratarDatas(dataObjetivo)
-        if (objTempo === null){
+        if (objTempo === null) {
             res.status(404)
         } else res.status(200).json(escolhasUtilizador(objTempo, req.body.valor))
     } catch (err) {

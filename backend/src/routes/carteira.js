@@ -28,8 +28,7 @@ carteiraRouter.post('/', async (req, res) => {
 
 carteiraRouter.patch('/:id', async (req, res) => {
     try {
-        console.log(req.body.valor)
-        console.log(req.body.id)
+        
         await updateWallet(req.body.valor, req.body.id)
         res.status(200).json("A funcionar")
     } catch(err) {
